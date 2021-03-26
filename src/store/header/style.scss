@@ -1,13 +1,19 @@
 
 
 .header {
+    background-color: white;
     .navbar {
         padding: 0;
         min-height: 66px;
+        box-shadow: 0 15px 19px -19px rgb(0, 0, 0 / 10%);
 
         .navbar-brand {
-            padding: 0.5rem 0.9rem;
+            padding: 0.9rem 0.9rem;
             border-right: 1px solid gray;
+        }
+
+        .toggler {
+            margin-right: 2rem;
         }
     }
 
