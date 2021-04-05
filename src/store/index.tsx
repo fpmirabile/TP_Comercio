@@ -1,6 +1,7 @@
 import * as React from "react";
 import Header from "./header";
 import PageContent from "./content";
+import AboutUs from "./about-us";
 
 class Store extends React.PureComponent {
   render() {
@@ -8,6 +9,7 @@ class Store extends React.PureComponent {
       <div>
         <Header />
         <PageContent />
+        <AboutUs />
       </div>
     );
   }
