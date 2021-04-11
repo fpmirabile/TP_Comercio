@@ -1,16 +1,30 @@
 import * as React from "react";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from "./header";
+import Footer from "./footer";
 import PageContent from "./content";
 import AboutUs from "./about-us";
+import NotFound from "./error-pages/not-found";
 
 class Store extends React.PureComponent {
   render() {
     return (
-      <div>
+      // Browser router porque queremos las url identicas sin #
+      <BrowserRouter>
         <Header />
-        <PageContent />
-        <AboutUs />
-      </div>
+        <Switch>
+          <Route path="/" exact>
+            <PageContent />
+          </Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
+          <Route path="/about-us">
+            <AboutUs />
+          </Route>
+        </Switch>
+        <Footer />
+      </BrowserRouter>
     );
   }
 }

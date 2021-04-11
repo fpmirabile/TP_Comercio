@@ -1,10 +1,6 @@
 import * as React from "react";
-import {
-    Navbar,
-    Nav,
-    NavDropdown,
-  } from "react-bootstrap";
-
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import "./style.scss";
 
 class TopbarCollapse extends React.PureComponent {
@@ -12,14 +8,25 @@ class TopbarCollapse extends React.PureComponent {
     return (
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Link href="#home">Inicio</Nav.Link>
-          <Nav.Link href="#link">Sobre la tienda</Nav.Link>
+          <NavLink className="nav-link" to="/">
+            Inicio
+          </NavLink>
+          <NavLink className="nav-link" to="/about-us">
+            Sobre la tienda
+          </NavLink>
           <NavDropdown title="Productos" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Muebles</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">Sillones</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Sillas</NavDropdown.Item>
-            {/* <NavDropdown.Divider /> */}
-            <NavDropdown.Item href="#action/3.4">Camas</NavDropdown.Item>
+            <NavLink className="dropdown-item" to="/product/muebles">
+              Muebles
+            </NavLink>
+            <NavLink className="dropdown-item" to="/product/sillones">
+              Sillones
+            </NavLink>
+            <NavLink className="dropdown-item" to="/product/sillas">
+              Sillas
+            </NavLink>
+            <NavLink className="dropdown-item" to="/product/camas">
+              Camas
+            </NavLink>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
