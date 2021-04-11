@@ -1,6 +1,7 @@
 import * as React from "react";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from "./header";
+import Footer from "./footer";
 import PageContent from "./content";
 import NotFound from "./error-pages/not-found";
 
@@ -18,6 +19,7 @@ class Store extends React.PureComponent {
             <NotFound />
           </Route>
         </Switch>
+        <Footer />
       </BrowserRouter>
     );
   }

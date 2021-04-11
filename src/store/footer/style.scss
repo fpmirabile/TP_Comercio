@@ -1,0 +1,67 @@
+.footer {
+  background-image: url(../../assets/images/footer_bg.png);
+  padding: 55px 0px 0px 0px;
+  background-size: cover;
+  background-position: center center;
+
+  .footer-top {
+    display: flex;
+
+    .new-account-title {
+      color: #fff;
+      font-size: 22px;
+      font-family: "Raleway", sans-serif;
+      font-weight: 300;
+      line-height: 26px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-right: 15px;
+
+      .custom {
+        width: 100%;
+        box-sizing: border-box;
+        background: #fff;
+        color: #646464;
+        min-height: 51px;
+        border-radius: 2px;
+        padding-left: 30px;
+        font-size: 15px;
+        font-family: "Raleway", sans-serif;
+        padding-right: 140px;
+        border-radius: 50px;
+      }
+
+      .signup-button {
+        border: none;
+        background: #1d99ff;
+        color: #fff;
+        padding: 11px 35px 11px;
+        border-radius: 2px;
+        font-weight: 600;
+        font-size: 15px;
+        position: absolute;
+        right: 5px;
+        top: 4px;
+        border-radius: 50px;
+      }
+    }
+
+    .help {
+      h4 {
+        color: #fff;
+        font-family: "Raleway", sans-serif;
+        font-size: 18px;
+        font-weight: 300;
+        padding: 4px 0px;
+      }
+    }
+  }
+
+  .footer-bottom {
+      display: flex;
+
+      
+  }
+}
