@@ -8,6 +8,12 @@
 		line-height: 36px;
 		margin-bottom: 85px;
 	}
+	.title{
+		font-size: 20px;
+		font-weight: 300;
+		line-height: 36px;
+		margin-bottom: 85px;
+	}
 	.section-gradient {
 		background-color: #09284b;
 		background-image: linear-gradient(to bottom, #010f1f 0, #051b34 100%);
@@ -44,10 +50,13 @@
 		width: 100%;
 	}
 
+	.col {
+		position: relative;
+	}
 	.do {
 		background-color: #021020;
 		position: relative;
-	
+		
 		.does-box {
 			margin-bottom: 20px;
 			background-color: #fff;
