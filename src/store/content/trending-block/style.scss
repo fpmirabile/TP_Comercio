@@ -12,12 +12,8 @@
 
   .image-block {
     .image {
-      &:not(:last-child) {
-        margin-right: 10rem;
-      }
-      &:first-child {
-        margin-left: 10rem;
-      }
+      object-fit: cover;
+      max-height: 400px;
     }
   }
 }

@@ -1,17 +1,24 @@
 import * as React from "react";
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  withRouter,
+  RouteComponentProps,
+} from "react-router-dom";
 import Header from "./header";
 import Footer from "./footer";
 import PageContent from "./content";
+import ModalContainer from "./modal-container";
 import NotFound from "./error-pages/not-found";
 
-class Store extends React.PureComponent {
+class Store extends React.PureComponent<RouteComponentProps> {
   render() {
+    const { location } = this.props;
+    const background = location.state && location.state.background;
     return (
-      // Browser router porque queremos las url identicas sin #
-      <BrowserRouter>
+      <div>
         <Header />
-        <Switch>
+        <Switch location={background || location}>
           <Route path="/" exact>
             <PageContent />
           </Route>
@@ -19,10 +26,13 @@ class Store extends React.PureComponent {
             <NotFound />
           </Route>
         </Switch>
+        {background && (
+          <Route path="/modals/:name" children={<ModalContainer />} />
+        )}
         <Footer />
-      </BrowserRouter>
+      </div>
     );
   }
 }
 
-export default Store;
+export default withRouter(Store);

@@ -1,10 +1,16 @@
 import * as React from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "./style.scss";
 
-class TopbarCollapse extends React.PureComponent {
+type PropsType = {
+  location: RouteComponentProps["location"];
+}
+
+class TopbarCollapse extends React.PureComponent<PropsType> {
   render() {
+    const { location } = this.props;
     return (
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
@@ -28,6 +34,13 @@ class TopbarCollapse extends React.PureComponent {
               Camas
             </NavLink>
           </NavDropdown>
+          <div className="vertical-separator" />
+          <NavLink className="nav-link" to={{ pathname: "/modals/login", state: { background: location }}}>
+            Login
+          </NavLink>
+          <NavLink className="nav-link" to="/sign-up">
+            Registrarse
+          </NavLink>
         </Nav>
       </Navbar.Collapse>
     );

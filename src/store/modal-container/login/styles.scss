@@ -1,0 +1,37 @@
+.login {
+  .modal-header {
+    border-bottom: none !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-flow: column wrap;
+    padding-top: 0 !important;
+    padding-bottom: 0.5rem !important;
+
+    .close {
+      order: 0;
+      justify-self: flex-end;
+      align-self: flex-end;
+      padding: 0 !important;
+      margin: 0 !important;
+      padding-top: 1rem !important;
+    }
+
+    .modal-title {
+      order: 2;
+    }
+  }
+
+  .modal-body {
+    padding-top: 0;
+    .cancel-button-container {
+      align-items: flex-end;
+      justify-content: flex-end;
+      display: flex;
+    }
+
+    .btn {
+      width: 120px;
+      height: 40px;
+    }
+  }
+}
