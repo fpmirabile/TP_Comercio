@@ -16,11 +16,11 @@ class Store extends React.PureComponent {
           <Route path="/" exact>
             <PageContent />
           </Route>
+          <Route path="/about-us" exact>
+            <AboutUs />
+          </Route>
           <Route path="*">
             <NotFound />
-          </Route>
-          <Route path="/about-us">
-            <AboutUs />
           </Route>
         </Switch>
         <Footer />
