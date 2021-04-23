@@ -2,16 +2,21 @@ import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import Login from "./login";
+import SignUp from "./sign-up";
+
+interface MatchParams {
+  name: string;
+}
 
 type StateProps = {
   show: boolean;
 };
 
 class ModalContainer extends React.PureComponent<
-  RouteComponentProps,
+  RouteComponentProps<MatchParams>,
   StateProps
 > {
-  constructor(props: RouteComponentProps) {
+  constructor(props: RouteComponentProps<MatchParams>) {
     super(props);
     this.state = {
       show: true,
@@ -30,10 +35,13 @@ class ModalContainer extends React.PureComponent<
   }
 
   render() {
+    const { match } = this.props;
     const { show } = this.state;
+    const { name } = match.params;
     return (
       <Modal centered show={show} onHide={this.handleClose} onExited={this.handleGoBackHistory}>
-        <Login onClose={this.handleClose} />
+        {name === 'login' && <Login onClose={this.handleClose} />}
+        {name === 'sign-up' && <SignUp onClose={this.handleClose} />}
       </Modal>
     );
   }

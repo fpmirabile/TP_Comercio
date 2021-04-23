@@ -1,12 +1,12 @@
 import * as React from "react";
-import { Modal, Button, Form, Col } from "react-bootstrap";
+import { Modal, Form, Button, Col } from "react-bootstrap";
 import "./styles.scss";
 
 type PropsType = {
   onClose: () => void;
 };
 
-class LoginModal extends React.PureComponent<PropsType> {
+class SignUp extends React.PureComponent<PropsType> {
   handleSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
   }
@@ -16,7 +16,7 @@ class LoginModal extends React.PureComponent<PropsType> {
     return (
       <div className="login">
         <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
+          <Modal.Title>Registracion</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={this.handleSubmitForm}>
@@ -28,10 +28,14 @@ class LoginModal extends React.PureComponent<PropsType> {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
+            <Form.Group controlId="formGroupRepeatPassword">
+              <Form.Label>Repetir Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
             <Form.Row>
               <Col xs={12} md={6}>
                 <Button variant="primary" type="submit">
-                  Login
+                  Registrarse
                 </Button>
               </Col>
               <Col className="cancel-button-container" xs={12} md={6}>
@@ -43,8 +47,8 @@ class LoginModal extends React.PureComponent<PropsType> {
           </Form>
         </Modal.Body>
       </div>
-    );
+    )
   }
 }
 
-export default LoginModal;
+export default SignUp;

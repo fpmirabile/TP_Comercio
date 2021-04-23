@@ -38,7 +38,7 @@ class TopbarCollapse extends React.PureComponent<PropsType> {
           <NavLink className="nav-link" to={{ pathname: "/modals/login", state: { background: location }}}>
             Login
           </NavLink>
-          <NavLink className="nav-link" to="/sign-up">
+          <NavLink className="nav-link" to={{ pathname: "/modals/sign-up", state: { background: location }}}>
             Registrarse
           </NavLink>
         </Nav>
