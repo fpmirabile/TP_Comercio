@@ -1,0 +1,21 @@
+.nav {
+  .navbar {
+    // TODO: Bootstrap template
+    background-color: #212121 !important;
+    padding: 0;
+    box-shadow: 0 15px 19px -19px rgb(0, 0, 0 / 10%);
+
+    .navbar-brand {
+      cursor: pointer;
+      background: #84c639;
+      font-size: 1.2em;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5em 3em;
+    }
+
+    .toggler {
+      margin-right: 2rem;
+    }
+  }
+}

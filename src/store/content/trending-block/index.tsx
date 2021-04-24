@@ -19,9 +19,9 @@ class TrendingBlock extends React.PureComponent {
     return (
       <img
         className="w-100 image"
-        src={
-          require(`../../../assets/images/trending/${image}`).default
-        }
+        // src={
+        //   require(`../../../assets/images/trending/${image}`).default
+        // }
         alt="slide1"
       />
     );

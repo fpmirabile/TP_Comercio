@@ -1,0 +1,17 @@
+.cart-button {
+  display: flex;
+  .btn-carrito {
+    color: #fff;
+    background-color: transparent;
+    font-size: 14px;
+    outline: none;
+    text-transform: capitalize;
+    border: 1px solid #84c639;
+    margin: 0.35em 0;
+    margin-left: 1rem;
+
+    img {
+      margin-left: 1rem;
+    }
+  }
+}

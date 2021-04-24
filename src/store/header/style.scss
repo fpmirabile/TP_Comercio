@@ -1,21 +1,71 @@
-
-
 .header {
-    background-color: white;
-    .navbar {
-        padding: 0;
-        min-height: 66px;
-        box-shadow: 0 15px 19px -19px rgb(0, 0, 0 / 10%);
+  padding: 4em 0 1em;
 
-        .navbar-brand {
-            padding: 0.9rem 0.9rem;
-            border-right: 1px solid gray;
-            cursor: pointer;
-        }
+  .ordering {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .logo {
+      font-size: 36px;
+      .home-logo {
+        font-size: 1.5em;
+        color: #212121;
+        text-decoration: none;
+        text-transform: uppercase;
+        background: url(../../assets/images/img-sp.png) no-repeat 54px 6px;
+        line-height: 1;
+        height: 97px;
+        display: block;
 
-        .toggler {
-            margin-right: 2rem;
+        .logo-letra {
+          font-size: 0.3em;
+          color: #fa1818;
+          display: block;
         }
+      }
     }
 
+    .navigation {
+      .navegation-list {
+        display: flex;
+        flex-flow: row wrap;
+        .navegation-item {
+          .item {
+            color: #212121;
+            text-decoration: none;
+
+            &:hover {
+              color: #fa1818;
+            }
+
+            i {
+              padding: 0 2em;
+            }
+          }
+        }
+      }
+    }
+
+    .contact {
+      margin-top: 1rem;
+      .list {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        align-items: center;
+        .item {
+          margin-right: 1em;
+
+          a {
+            padding-left: 1em;
+            color: #212121;
+
+            &:hover {
+              color: #fa1818;
+            }
+          }
+        }
+      }
+    }
+  }
 }

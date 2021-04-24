@@ -9,10 +9,10 @@ type PropTypes = {
 
 class Category extends React.PureComponent<PropTypes> {
   render() {
-    const { imageName, categoryName } = this.props;
+    // const { imageName, categoryName } = this.props;
     return (
       <div className="product-category">
-        <Card>
+        {/* <Card>
           <Card.Img
             src={require(`../../../../assets/images/product/${imageName}`).default}
             alt={categoryName}
@@ -20,7 +20,7 @@ class Category extends React.PureComponent<PropTypes> {
           <Card.ImgOverlay>
             <Card.Title>{categoryName}</Card.Title>
           </Card.ImgOverlay>
-        </Card>
+        </Card> */}
       </div>
     );
   }

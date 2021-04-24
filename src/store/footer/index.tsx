@@ -1,5 +1,7 @@
 import * as React from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
+import Column, { MapaSitio } from "./link-column";
+import Banners from "./banners";
 import "./style.scss";
 
 class Footer extends React.PureComponent {
@@ -8,36 +10,15 @@ class Footer extends React.PureComponent {
       <div className="footer">
         <Container>
           <Row>
-            <div className="footer-top">
-              <Col md={2} sm={6}>
-                <h2 className="new-account-title">
-                  Empieza una cuenta nueva hoy!
-                </h2>
-              </Col>
-              <Col md={6} sm={6}>
-                <Form>
-                  <Form.Group controlId="sign-up">
-                    <Form.Control
-                      as="input"
-                      placeholder="Ingresa tu email"
-                      custom
-                    />
-                    <Button className="signup-button">Continuar</Button>
-                  </Form.Group>
-                </Form>
-              </Col>
-              <Col md={4} sm={12}>
-                <div className="help">
-                  <h4>Preguntas? Comunicate al 12 34 56 78.</h4>
-                </div>
-              </Col>
-            </div>
-            <div className="footer-bottom">
-                <Col md={6} sm={6}>
-                </Col>
-                <Col md={6} sm={6}>
-                </Col>
-            </div>
+            <Col md={3}>
+              <Column title="Informacion" links={informacion} />
+            </Col>
+            <Col md={3}>
+              <Column title="Que vendemos?" links={contenido} />
+            </Col>
+            <Col md={6}>
+              <Banners />
+            </Col>
           </Row>
         </Container>
       </div>
@@ -46,3 +27,37 @@ class Footer extends React.PureComponent {
 }
 
 export default Footer;
+
+const informacion: Array<MapaSitio> = [
+  {
+    title: "Sobre nosotros",
+    link: "/about-us",
+  },
+  {
+    title: "Ofertas",
+    link: "/deals",
+  },
+];
+
+const contenido: Array<MapaSitio> = [
+  {
+    title: "Galletitas y snacks",
+    link: "/",
+  },
+  {
+    title: "Harinas",
+    link: "",
+  },
+  {
+    title: "Panificados",
+    link: "",
+  },
+  {
+    title: "Pastas de arroz",
+    link: "",
+  },
+  {
+    title: "Varios",
+    link: "",
+  },
+]

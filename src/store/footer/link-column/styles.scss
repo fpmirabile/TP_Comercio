@@ -1,0 +1,34 @@
+.link-column {
+  font-size: 1.2em;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 2em;
+
+  .title {
+    font-size: 1.2em;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 2em;
+  }
+
+  .list {
+    list-style-type: none;
+    .list-link {
+      font-size: 14px;
+      margin-bottom: 1.5em;
+      padding-left: 1.5rem;
+      background: url(../../../assets/images/img-sp.png) no-repeat -14px -193px;
+
+      .nav-link {
+        padding: 0 !important;
+        color: #999 !important;
+        text-decoration: none;
+        text-transform: capitalize;
+
+        &:hover {
+          color: #fff !important;
+        }
+      }
+    }
+  }
+}
