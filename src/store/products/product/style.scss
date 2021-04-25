@@ -1,0 +1,80 @@
+.product-category {
+  .card {
+    background: white;
+    padding-bottom: 30px;
+    min-height: 280px;
+    margin-bottom: 30px;
+    transition: ease all 0.5s;
+    border-radius: 20px;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+      background-color: #f1f8e0;
+    }
+
+    .card-img {
+      padding: 5 5 5 5;
+      max-width: 70%;
+      height: auto;
+      align-items: center;
+      display: block;
+      margin: auto;
+    }
+
+    .card-body {
+      position: relative;
+      padding-bottom: 0;
+      padding: 12px 0px;
+      color: black;
+      text-align: center;
+      font-family: "Open Sans", "Source Sans Pro", sans-serif;
+
+      .card-title {
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 500;
+        transition: all 0.3s ease 0s;
+        letter-spacing: 0px;
+        //font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      }
+
+      .card-text {
+        font-size: 20px;
+        font-weight: 620;
+        color: green;
+
+        span {
+          text-decoration: line-through;
+          padding-left: 1em;
+          color: grey;
+          font-size: 17px;
+        }
+      }
+      .btn-agregar{
+        width: 140px;
+        padding: 12px 0px;
+        background: #A6CE39;
+        color: #fff;
+        font-weight: 900;
+        border-radius: 4px;
+        text-transform: uppercase;
+        margin-top: 12px;
+        display: block;
+        text-decoration: none;
+        margin:auto;
+      }
+    }
+  }
+}
+
+/*  width: 140px;
+    padding: 12px 0px;
+    background: #A6CE39;
+    color: #fff;
+    font-weight: 900;
+    border-radius: 4px;
+    text-transform: uppercase;
+    margin-top: 12px;
+    display: block;
+    text-decoration: none;*/

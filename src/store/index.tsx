@@ -10,6 +10,7 @@ import Footer from "./footer";
 import PageContent from "./content";
 import ModalContainer from "./modal-container";
 import NotFound from "./error-pages/not-found";
+import Products from "./products";
 
 class Store extends React.PureComponent<RouteComponentProps> {
   render() {
@@ -21,6 +22,9 @@ class Store extends React.PureComponent<RouteComponentProps> {
         <Switch location={background || location}>
           <Route path="/" exact>
             <PageContent />
+          </Route>
+          <Route path="/products" exact>
+            <Products />
           </Route>
           <Route path="*">
             <NotFound />
