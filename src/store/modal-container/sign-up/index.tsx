@@ -2,7 +2,7 @@ import * as React from "react";
 import { Modal, Form, Button, Col } from "react-bootstrap";
 import "./styles.scss";
 
-type PropsType = {
+interface PropsType {
   onClose: () => void;
 };
 
