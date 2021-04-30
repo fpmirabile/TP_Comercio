@@ -1,0 +1,13 @@
+.carousel-container {
+  position: absolute;
+  top: 11rem;
+  max-width: 84.8%;
+  right: 0;
+
+  .image-block {
+    img {
+      object-fit: cover;
+      height: 355px;
+    }
+  }
+}
