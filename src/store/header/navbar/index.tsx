@@ -11,6 +11,11 @@ class Nav extends React.PureComponent<RouteComponentProps> {
     history.push("/");
   }
 
+  handleOnCartClick = () => {
+    const { history, location } = this.props;
+    history.push("/modals/checkout", { background: location });
+  }
+
   render() {
     const { location } = this.props;
     return (
@@ -20,7 +25,7 @@ class Nav extends React.PureComponent<RouteComponentProps> {
             Productos celiacos!
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggler" />
-          <SearchForm />
+          <SearchForm onCartClick={this.handleOnCartClick} />
           <RightBar location={location} />
         </Navbar>
       </div>

@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import Login from "./login";
 import SignUp from "./sign-up";
+import Checkout from "./checkout";
 
 interface MatchParams {
   name: string;
@@ -42,6 +43,7 @@ class ModalContainer extends React.PureComponent<
       <Modal centered show={show} onHide={this.handleClose} onExited={this.handleGoBackHistory}>
         {name === 'login' && <Login onClose={this.handleClose} />}
         {name === 'sign-up' && <SignUp onClose={this.handleClose} />}
+        {name === 'checkout' && <Checkout onClose={this.handleClose} />}
       </Modal>
     );
   }

@@ -1,9 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import { Container } from "react-bootstrap";
-import SearchBlock from "./search-block";
-import Categories from "./categories";
-import TrendingBlock from "./trending-block";
+import Promos from "./promos";
+import HotSales from "./hot-sales";
 import "./style.scss";
 
 class PageContent extends React.PureComponent {
@@ -11,13 +9,10 @@ class PageContent extends React.PureComponent {
     return (
       <div className="main-content">
         <Helmet>
-          <title>Venta de comodidad - Home Page</title>
+          <title>Almacen celiaco - los mejores productos! - Inicio</title>
         </Helmet>
-        <Container>
-          <SearchBlock />
-          <Categories />
-        </Container>
-        <TrendingBlock />
+        <Promos />
+        <HotSales products={{ name: "asd", image: "asd"}} />
       </div>
     );
   }

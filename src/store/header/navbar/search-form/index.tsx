@@ -3,8 +3,13 @@ import { Form, FormControl, Button } from "react-bootstrap";
 import Cart from "./cart";
 import "./styles.scss";
 
-class SearchForm extends React.PureComponent {
+interface PropTypes {
+  onCartClick: () => void;
+}
+
+class SearchForm extends React.PureComponent<PropTypes> {
   render() {
+    const { onCartClick } = this.props;
     return (
       <div className="search-form">
         <Form className="navbar-form" inline>
@@ -15,7 +20,7 @@ class SearchForm extends React.PureComponent {
           />
           <Button className="navbar-button" variant="outline-success" />
         </Form>
-        <Cart />
+        <Cart onCartClick={onCartClick} />
       </div>
     );
   }

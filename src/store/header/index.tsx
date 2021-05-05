@@ -4,6 +4,7 @@ import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope } from "@fortawesome/fontawesome-free-solid";
 import Nav from "./navbar";
+import Menu from "./menu";
 import "./style.scss";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
@@ -50,14 +51,15 @@ class StoreHeader extends React.PureComponent<RouteComponentProps> {
                     <a href="tel:0123234567">(+0123) 234 567</a>
                   </li>
                   <li className="item">
-                  <FontAwesomeIcon icon={faEnvelope as IconProp} />
-                  <a href="mailto:store@grocery.com">store@grocery.com</a>
+                    <FontAwesomeIcon icon={faEnvelope as IconProp} />
+                    <a href="mailto:store@grocery.com">store@grocery.com</a>
                   </li>
                 </ul>
               </div>
             </div>
           </Container>
         </header>
+        <Menu />
       </div>
     );
   }
