@@ -16,12 +16,9 @@ class HotSales extends React.PureComponent<PropTypes> {
     // const { products } = this.props;
     return (
       <div className="hot-sales-container">
-        <div className="title">Ofertas</div>
+        <div className="title">Los Más vendidos</div>
         <div className="products">
-          <ProductCard image="" name="" />
-					<ProductCard image="" name="" />
-					<ProductCard image="" name="" />
-					<ProductCard image="" name="" />
+
         </div>
       </div>
     );

@@ -1,29 +1,40 @@
 import * as React from "react";
 import { Card } from "react-bootstrap";
-import "./styles.scss";
+import "./style.scss";
 
-interface PropTypes {
-  name: string;
-  image: string;
-}
+type PropTypes = {
+  productName: string;
+  imageName: string;
+  title:string;
+  type: number;
+  offer: number;
+  price: number;
+};
 
 class ProductCard extends React.PureComponent<PropTypes> {
   render() {
+    const { imageName, productName,title, type, offer, price } = this.props;
     return (
-      <div className="product-container">
+      <div className="product-category">
         <Card>
           <Card.Img
-            variant="top"
-            src={require("../../../assets/images/products/1.png").default}
+            variant = "top"
+            src={require(`../../../assets/images/product/${imageName}`).default}
+            alt={productName}
           />
           <Card.Body>
             <Card.Title>
-                Producto 1
+              <Card.Title>
+                {title}
+              </Card.Title>
             </Card.Title>
             <Card.Text>
-              <span className="actual-price">11$</span>
-              <span className="price-without-discount">8$</span>
+              <span className="actual-price">${offer}</span>
+              <span className="price-without-discount">${price}</span>
             </Card.Text>
+            <a href="#" className="btn-agregar">
+                Agregar
+              </a>
           </Card.Body>
         </Card>
       </div>

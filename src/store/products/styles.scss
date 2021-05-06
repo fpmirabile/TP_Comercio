@@ -1,0 +1,28 @@
+.products{
+.container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  //background: #f5f5f5;
+
+  
+  .title {
+    color: #212121 !important;
+    padding-bottom: 0.5em;
+    position: relative;
+    font-size: 2.5em;
+    margin-bottom: 2rem;
+
+    &::after {
+      content: "";
+      background: #fa1818 !important;
+      height: 2px;
+      width: 100%;
+      position: absolute;
+      bottom: 10%;
+      left: 0;
+    }
+}
+  }
+}

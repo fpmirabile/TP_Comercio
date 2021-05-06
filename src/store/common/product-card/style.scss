@@ -11,6 +11,7 @@
       cursor: pointer;
       transform: scale(1.1);
       background-color: #f1f8e0;
+      transition: background-color 1000ms linear;
     }
 
     .card-img {
@@ -40,21 +41,23 @@
       }
 
       .card-text {
-        font-size: 20px;
         font-weight: 620;
-        color: green;
 
-        span {
+        .actual-price {
+          font-size: 20px;
+          color: green;
+        }
+        .price-without-discount {
           text-decoration: line-through;
           padding-left: 1em;
           color: grey;
           font-size: 17px;
         }
       }
-      .btn-agregar{
+      .btn-agregar {
         width: 140px;
         padding: 12px 0px;
-        background: #A6CE39;
+        background: #a6ce39;
         color: #fff;
         font-weight: 900;
         border-radius: 4px;
@@ -62,7 +65,7 @@
         margin-top: 12px;
         display: block;
         text-decoration: none;
-        margin:auto;
+        margin: auto;
       }
     }
   }
