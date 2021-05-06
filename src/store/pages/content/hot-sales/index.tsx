@@ -1,5 +1,5 @@
 import * as React from "react";
-import ProductCard from "../../common/product-card";
+import ProductCard from "../../../common/product-card";
 import "./styles.scss";
 
 interface Product {

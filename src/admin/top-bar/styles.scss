@@ -1,0 +1,28 @@
+.top-bar {
+  background: #ededed;
+  border-bottom: 1px solid #d9dee4;
+  padding: 0 !important;
+  margin-left: 3.75rem;
+  &.expanded {
+    margin-left: 14.375rem;
+  }
+
+  .nav-bar-toggle {
+    .btn-toggle {
+      background-color: transparent;
+      border: none;
+      font-size: 26px;
+      
+      &:active, &:focus {
+        outline: none !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      .fa-bars {
+        color: #5e6974;
+      }
+    }
+  }
+}

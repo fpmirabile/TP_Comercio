@@ -7,27 +7,27 @@ import {
 } from "react-router-dom";
 import Header from "./header";
 import Footer from "./footer";
-import PageContent from "./content";
+import PageContent from "./pages/content";
 import ModalContainer from "./modal-container";
-import NotFound from "./error-pages/not-found";
+import NotFound from "./pages/error-pages/not-found";
 
 class Store extends React.PureComponent<RouteComponentProps> {
   render() {
-    const { location } = this.props;
+    const { location, match } = this.props;
     const background = location.state && location.state.background;
     return (
       <div>
         <Header />
         <Switch location={background || location}>
-          <Route path="/" exact>
+          <Route path={`${match.url}/`}>
             <PageContent />
           </Route>
-          <Route path="*">
+          <Route path={`${match.url}/*`}>
             <NotFound />
           </Route>
         </Switch>
         {background && (
-          <Route path="/modals/:name" children={<ModalContainer />} />
+          <Route path={`/modals/:name`} children={<ModalContainer />} />
         )}
         <Footer />
       </div>
