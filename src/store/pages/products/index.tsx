@@ -1,9 +1,5 @@
 import * as React from "react";
-import {
-  Row,
-  Col,
-  Container,
-} from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import ProductCard from "../../common/product-card";
 import "./styles.scss";
 
@@ -43,17 +39,17 @@ class Products extends React.PureComponent<PropTypes> {
           <div className="title">{title}</div>
 
           <Row>
-          {temporal.map((product) =>
-            this.renderProduct(
-              product.catId,
-              product.type,
-              product.title,
-              product.productName,
-              product.imageName,
-              product.offer,
-              product.price
-            )
-          )}
+            {temporal.map((product) =>
+              this.renderProduct(
+                product.catId,
+                product.type,
+                product.title,
+                product.productName,
+                product.imageName,
+                product.offer,
+                product.price
+              )
+            )}
           </Row>
         </Container>
       </div>

@@ -2,23 +2,36 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import * as React from "react";
 import { Button } from "react-bootstrap";
+import { withRouter, RouteComponentProps } from "react-router";
 import "./styles.scss";
 
-interface PropType {
+interface PropType extends RouteComponentProps {
   expandedSidebar: boolean;
-  onHomeClick: () => void;
-  onReportClick: () => void;
-  onProductClick: () => void;
 }
 
 class LeftBar extends React.PureComponent<PropType> {
+  handleHomeClick = () => {
+    const { history, match } = this.props;
+    history.push(`${match.url}`);
+  };
+
+  handleProductClick = () => {
+    const { history, match } = this.props;
+    history.push(`${match.url}/products`);
+  };
+
+  handleReportClick = () => {
+    const { history, match } = this.props;
+    history.push(`${match.url}/charts`);
+  };
+
+  handleGoToTheSite = () => {
+    const { history } = this.props;
+    history.push("/");
+  }
+
   render() {
-    const {
-      expandedSidebar,
-      onHomeClick,
-      onReportClick,
-      onProductClick,
-    } = this.props;
+    const { expandedSidebar } = this.props;
     const rightBarClasses = classNames("right-bar", {
       expanded: expandedSidebar,
     });
@@ -43,21 +56,27 @@ class LeftBar extends React.PureComponent<PropType> {
                 <h3 className="title">General</h3>
                 <ul className="admin-link">
                   <li className="admin-link-section">
-                    <Button onClick={onHomeClick} className="btn-admin-link">
+                    <Button onClick={this.handleHomeClick} className="btn-admin-link">
                       <FontAwesomeIcon icon="home" />
                       <span className="button-title">Inicio</span>
                     </Button>
                   </li>
                   <li className="admin-link-section">
-                    <Button onClick={onProductClick} className="btn-admin-link">
+                    <Button onClick={this.handleProductClick} className="btn-admin-link">
                       <FontAwesomeIcon icon="shopping-cart" />
                       <span className="button-title">Productos</span>
                     </Button>
                   </li>
                   <li className="admin-link-section">
-                    <Button onClick={onReportClick} className="btn-admin-link">
+                    <Button onClick={this.handleReportClick} className="btn-admin-link">
                       <FontAwesomeIcon icon="table" />
                       <span className="button-title">Reportes</span>
+                    </Button>
+                  </li>
+                  <li className="admin-link-section">
+                    <Button onClick={this.handleGoToTheSite} className="btn-admin-link">
+                      <FontAwesomeIcon icon="backward" />
+                      <span className="button-title">Volver al sitio</span>
                     </Button>
                   </li>
                 </ul>
@@ -70,4 +89,4 @@ class LeftBar extends React.PureComponent<PropType> {
   }
 }
 
-export default LeftBar;
+export default withRouter(LeftBar);
