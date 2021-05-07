@@ -11,7 +11,7 @@ interface PropType {
   onProductClick: () => void;
 }
 
-class RightBar extends React.PureComponent<PropType> {
+class LeftBar extends React.PureComponent<PropType> {
   render() {
     const {
       expandedSidebar,
@@ -70,4 +70,4 @@ class RightBar extends React.PureComponent<PropType> {
   }
 }
 
-export default RightBar;
+export default LeftBar;

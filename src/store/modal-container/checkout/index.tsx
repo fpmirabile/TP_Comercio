@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import { Modal, Row, Col, Form, Button } from "react-bootstrap";
 import "./styles.scss";
@@ -31,8 +32,8 @@ class Checkout extends React.PureComponent<PropsType> {
                 <Col md={2}>
                   <Form.Control value="1" as="input" />
                 </Col>
-                <Col md={2}>
-                  <img alt="Remove Icon" />
+                <Col md={2} className="remove">
+                  <FontAwesomeIcon icon="trash" className="mt-1" />
                 </Col>
                 <Col md={2}>
                   <span>7$</span>
@@ -46,8 +47,8 @@ class Checkout extends React.PureComponent<PropsType> {
                 <Col md={2}>
                   <Form.Control value="1" as="input" />
                 </Col>
-                <Col md={2}>
-                  <img alt="Remove Icon" />
+                <Col md={2} className="remove">
+                  <FontAwesomeIcon icon="trash" className="mt-1" />
                 </Col>
                 <Col md={2}>
                   <span>7$</span>
@@ -56,11 +57,11 @@ class Checkout extends React.PureComponent<PropsType> {
             </Row>
           </div>
           <div className="control-container">
-            <div className="total">
-              Total $14
-            </div>
+            <div className="total">Total $14</div>
             <div className="button-container">
-              <Button className="btn-pay" onClick={this.handleCheckOut}>Pagar</Button>
+              <Button className="btn-pay" onClick={this.handleCheckOut}>
+                Pagar
+              </Button>
             </div>
           </div>
         </Modal.Body>
