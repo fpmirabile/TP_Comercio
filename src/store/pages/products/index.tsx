@@ -2,10 +2,7 @@ import * as React from "react";
 import {
   Row,
   Col,
-  Card,
   Container,
-  ButtonGroup,
-  Button,
 } from "react-bootstrap";
 import ProductCard from "../../common/product-card";
 import "./styles.scss";
