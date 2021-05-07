@@ -1,15 +1,17 @@
 import * as React from "react";
 import { Form, FormControl, Button } from "react-bootstrap";
-import Cart from "./cart";
+import RightButtons from "./right-buttons";
 import "./styles.scss";
 
 interface PropTypes {
+  isAdmin: boolean;
   onCartClick: () => void;
+  onAdminClick: () => void;
 }
 
 class SearchForm extends React.PureComponent<PropTypes> {
   render() {
-    const { onCartClick } = this.props;
+    const { isAdmin, onCartClick, onAdminClick } = this.props;
     return (
       <div className="search-form">
         <Form className="navbar-form" inline>
@@ -20,7 +22,7 @@ class SearchForm extends React.PureComponent<PropTypes> {
           />
           <Button className="navbar-button" variant="outline-success" />
         </Form>
-        <Cart onCartClick={onCartClick} />
+        <RightButtons isAdmin={isAdmin} onAdminClick={onAdminClick} onCartClick={onCartClick} />
       </div>
     );
   }

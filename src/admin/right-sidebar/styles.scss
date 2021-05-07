@@ -1,0 +1,89 @@
+.right-bar {
+  background: #2a3f54;
+  position: absolute;
+  z-index: 1;
+  padding: 0;
+  width: 60px;
+  height: 100%;
+
+  &.expanded {
+    width: 230px;
+  }
+
+  .profile-section {
+    margin-top: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .user-img {
+      width: 100px;
+      background: #fff;
+      z-index: 1000;
+      border: 1px solid rgba(52, 73, 94, 0.44);
+      padding: 0.3rem;
+      border-radius: 50%;
+    }
+
+    .welcome-text {
+      padding: 25px 10px 10px;
+      span {
+        display: block;
+        font-size: 13px;
+        line-height: 30px;
+        color: #bab8b8;
+      }
+
+      .name {
+        font-size: 14px;
+        color: #ecf0f1;
+        margin: 0;
+        font-weight: 300;
+      }
+    }
+  }
+
+  .sidebar-menu {
+    margin-top: 1.5rem;
+    padding: 0;
+
+    .sidebar-section {
+      margin-bottom: 35px;
+
+      .title {
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: bold;
+        font-size: 11px;
+        margin-bottom: 0;
+        margin-top: 0;
+        text-shadow: 1px 1px #000;
+        padding-left: 1.4rem;
+      }
+
+      .admin-link {
+        margin-top: 0.8rem;
+        .admin-link-section {
+          margin: 1rem 0;
+          .btn-admin-link {
+            background-color: transparent !important;
+            border: none !important;
+            padding-left: 0.2rem;
+            width: 100%;
+            border: 2px solid #ededed;
+            display: flex;
+            padding-left: 1rem;
+
+            .button-title {
+              margin-left: 1rem;
+              color: #E7E7E7;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
+}

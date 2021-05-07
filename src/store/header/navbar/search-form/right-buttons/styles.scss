@@ -14,4 +14,9 @@
       margin-left: 1rem;
     }
   }
+
+  .btn-admin {
+    margin-left: 3rem;
+    @extend .btn-carrito
+  }
 }

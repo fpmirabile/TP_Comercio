@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Container } from "react-bootstrap";
 import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope } from "@fortawesome/fontawesome-free-solid";
 import Nav from "./navbar";
 import Menu from "./menu";
+import Promos from "./promos";
 import "./style.scss";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
@@ -14,7 +14,7 @@ class StoreHeader extends React.PureComponent<RouteComponentProps> {
       <div>
         <Nav />
         <header className="header">
-          <Container className="ordering">
+          <div className="ordering">
             <div className="logo">
               <NavLink className="home-logo" to="/">
                 <span className="logo-letra">Almacen</span>
@@ -57,9 +57,12 @@ class StoreHeader extends React.PureComponent<RouteComponentProps> {
                 </ul>
               </div>
             </div>
-          </Container>
+          </div>
         </header>
-        <Menu />
+        <div className="menu-promo-container">
+          <Menu />
+          <Promos />
+        </div>
       </div>
     );
   }

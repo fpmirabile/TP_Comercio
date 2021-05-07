@@ -1,9 +1,6 @@
 .carousel-container {
-  position: absolute;
-  top: 11rem;
-  max-width: 84.8%;
-  right: 0;
-
+  flex: 1;
+  
   .image-block {
     img {
       object-fit: cover;
