@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Helmet } from "react-helmet";
 import {
   BarChart,
   Bar,
@@ -14,6 +15,9 @@ class Dashboard extends React.PureComponent {
   render() {
     return (
       <div className="dashboard">
+        <Helmet>
+          <title>Dashboard - Admin</title>
+        </Helmet>
         <h1>Bienvenido, Usuario</h1>
         <h3>Este es tu dashboard</h3>
         <br />

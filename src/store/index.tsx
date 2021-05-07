@@ -26,7 +26,7 @@ class Store extends React.PureComponent<RouteComponentProps> {
           <Route path={`${match.url}/`}>
             <PageContent />
           </Route>
-          <Route path={`${match.url}/*`}>
+          <Route path="*">
             <NotFound />
           </Route>
         </Switch>

@@ -12,7 +12,7 @@ class RightBar extends React.PureComponent<PropsType> {
   render() {
     const { location } = this.props;
     return (
-      <div className="ml-auto right-bar">
+      <div className="ml-auto nav-right-bar">
         <Nav>
           <NavLink
             className="nav-link"
