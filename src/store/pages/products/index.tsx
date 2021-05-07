@@ -1,9 +1,20 @@
 import * as React from "react";
-import { Row, Col,Card, Container, ButtonGroup, Button } from "react-bootstrap";
-import ProductCard from "../common/product-card";
+import {
+  Row,
+  Col,
+  Card,
+  Container,
+  ButtonGroup,
+  Button,
+} from "react-bootstrap";
+import ProductCard from "../../common/product-card";
 import "./styles.scss";
 
-class Products extends React.PureComponent {
+interface PropTypes {
+  title: string;
+}
+
+class Products extends React.PureComponent<PropTypes> {
   renderProduct = (
     catId: number,
     type: number,
@@ -28,13 +39,13 @@ class Products extends React.PureComponent {
   };
 
   render() {
+    const { title } = this.props;
     return (
       <div className="products">
-      <Container>
-       
-        <div className="title">Productos</div>
-        
-        <Row>
+        <Container>
+          <div className="title">{title}</div>
+
+          <Row>
           {temporal.map((product) =>
             this.renderProduct(
               product.catId,
@@ -46,8 +57,8 @@ class Products extends React.PureComponent {
               product.price
             )
           )}
-        </Row>
-      </Container>
+          </Row>
+        </Container>
       </div>
     );
   }
