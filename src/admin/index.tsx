@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Route, RouteComponentProps, Switch, withRouter } from "react-router";
 import Topbar from "./top-bar";
-import RightBar from "./right-sidebar";
+import LeftBar from "./right-sidebar";
 import Dashboard from "./pages/dashboard";
 import Products from "./pages/products";
+import NewProduct from "./pages/new-product";
 import Reports from "./pages/reports";
 import classNames from "classnames";
 import "./styles.scss";
@@ -29,7 +30,7 @@ class AdminPage extends React.PureComponent<RouteComponentProps, StateType> {
 
   handleHomeClick = () => {
     const { history, match } = this.props;
-    history.push(`${match.url}/`);
+    history.push(`${match.url}`);
   };
 
   handleProductClick = () => {
@@ -42,15 +43,21 @@ class AdminPage extends React.PureComponent<RouteComponentProps, StateType> {
     history.push(`${match.url}/charts`);
   };
 
+  handleNewProductClick = () => {
+    const { history, match } = this.props;
+    history.push(`${match.url}/products/new`);
+  }
+
   render() {
     const { expandSideBar } = this.state;
     const { match } = this.props;
     const bodyMarginClass = classNames("page-body", {
       expanded: expandSideBar,
     });
+
     return (
       <div>
-        <RightBar
+        <LeftBar
           expandedSidebar={expandSideBar}
           onHomeClick={this.handleHomeClick}
           onProductClick={this.handleProductClick}
@@ -62,8 +69,11 @@ class AdminPage extends React.PureComponent<RouteComponentProps, StateType> {
         />
         <div className={bodyMarginClass}>
           <Switch>
+          <Route path={`${match.url}/products/new`}>
+              <NewProduct />
+            </Route>
             <Route path={`${match.url}/products`}>
-              <Products />
+              <Products onNewProductClick={this.handleProductClick} />
             </Route>
             <Route path={`${match.url}/charts`}>
               <Reports />

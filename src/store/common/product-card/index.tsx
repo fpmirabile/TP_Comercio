@@ -18,9 +18,9 @@ class ProductCard extends React.PureComponent<PropTypes> {
       <div className="product-category">
         <Card>
           <Card.Img
-            variant = "top"
-            src={require(`../../../assets/images/product/${imageName}`).default}
-            alt={productName}
+     
+            variant="top"
+            src={require("../../../assets/images/products/41.png").default}
           />
           <Card.Body>
             <Card.Title>

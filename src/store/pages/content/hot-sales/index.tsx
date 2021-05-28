@@ -16,7 +16,7 @@ class HotSales extends React.PureComponent<PropTypes> {
     // const { products } = this.props;
     return (
       <div className="hot-sales-container">
-        <div className="title">Los Más vendidos</div>
+        <div className="title">Productos mas vendidos</div>
         <div className="products">
 
         </div>
