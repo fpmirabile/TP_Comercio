@@ -28,25 +28,10 @@ class AdminPage extends React.PureComponent<RouteComponentProps, StateType> {
     });
   };
 
-  handleHomeClick = () => {
-    const { history, match } = this.props;
-    history.push(`${match.url}`);
-  };
-
-  handleProductClick = () => {
-    const { history, match } = this.props;
-    history.push(`${match.url}/products`);
-  };
-
-  handleReportClick = () => {
-    const { history, match } = this.props;
-    history.push(`${match.url}/charts`);
-  };
-
   handleNewProductClick = () => {
     const { history, match } = this.props;
     history.push(`${match.url}/products/new`);
-  }
+  };
 
   render() {
     const { expandSideBar } = this.state;
@@ -57,23 +42,18 @@ class AdminPage extends React.PureComponent<RouteComponentProps, StateType> {
 
     return (
       <div>
-        <LeftBar
-          expandedSidebar={expandSideBar}
-          onHomeClick={this.handleHomeClick}
-          onProductClick={this.handleProductClick}
-          onReportClick={this.handleReportClick}
-        />
+        <LeftBar expandedSidebar={expandSideBar} />
         <Topbar
           expandedSideBar={expandSideBar}
           onHamburgerClick={this.handleHamburgerClick}
         />
         <div className={bodyMarginClass}>
           <Switch>
-          <Route path={`${match.url}/products/new`}>
+            <Route path={`${match.url}/products/new`}>
               <NewProduct />
             </Route>
             <Route path={`${match.url}/products`}>
-              <Products onNewProductClick={this.handleProductClick} />
+              <Products onNewProductClick={this.handleNewProductClick} />
             </Route>
             <Route path={`${match.url}/charts`}>
               <Reports />
