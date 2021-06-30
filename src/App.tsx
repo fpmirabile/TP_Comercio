@@ -7,19 +7,15 @@ import Products from "./store/pages/products";
 import Header from "./store/header";
 import Footer from "./store/footer";
 
+
 export default class App extends React.PureComponent {
   render() {
     return (
       // Browser router porque queremos las url identicas sin #
-      <BrowserRouter basename="/">
+      <BrowserRouter>
         <Switch>
           <Route path="/admin">
             <Admin />
-          </Route>
-          <Route path="/products" exact>
-            <Header />
-            <Products title="Productos"  />
-            <Footer />
           </Route>
           <Route path="/">
             <Store />

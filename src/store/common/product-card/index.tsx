@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Card } from "react-bootstrap";
+import { Card, Button} from "react-bootstrap";
 import "./style.scss";
 
 type PropTypes = {
@@ -11,7 +11,10 @@ type PropTypes = {
   price: number;
 };
 
+
+
 class ProductCard extends React.PureComponent<PropTypes> {
+
   render() {
     const { imageName, productName,title, type, offer, price } = this.props;
     return (
@@ -32,9 +35,9 @@ class ProductCard extends React.PureComponent<PropTypes> {
               <span className="actual-price">${offer}</span>
               <span className="price-without-discount">${price}</span>
             </Card.Text>
-            <a href="#" className="btn-agregar">
+              <Button className="btn-agregar">
                 Agregar
-              </a>
+              </Button>
           </Card.Body>
         </Card>
       </div>
