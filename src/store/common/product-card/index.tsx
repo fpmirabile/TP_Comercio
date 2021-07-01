@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Card } from "react-bootstrap";
+import { Card, Button} from "react-bootstrap";
 import "./style.scss";
 
 interface PropTypes {
@@ -11,7 +11,10 @@ interface PropTypes {
   price: number;
 }
 
+
+
 class ProductCard extends React.PureComponent<PropTypes> {
+
   render() {
     const { imageName, productName, title, offer, price } = this.props;
     return (

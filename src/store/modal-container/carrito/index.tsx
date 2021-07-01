@@ -2,20 +2,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import { Modal, Row, Col, Form, Button } from "react-bootstrap";
 import "./styles.scss";
+import ProductCard from "../../common/product-card";
 
 interface PropsType {
   onClose: () => void;
+  onCheckout: () => void;
+  productos: Array<{
+            producto: ProductCard;
+            cantidad: number;
+            }>
 }
 
-class Checkout extends React.PureComponent<PropsType> {
+class Carrito extends React.PureComponent<PropsType> {
   handleCheckOut = () => {
-    const { onClose } = this.props;
-    console.log("Checkout de pago");
-    onClose();
+    const { onCheckout } = this.props;
+    //Validar el carrito
+    onCheckout();
   };
-
+  
   render() {
-    // const { onClose } = this.props;
     return (
       <div className="checkout">
         <Modal.Header closeButton>
@@ -36,7 +41,7 @@ class Checkout extends React.PureComponent<PropsType> {
                   <FontAwesomeIcon icon="trash" className="mt-1" />
                 </Col>
                 <Col md={2}>
-                  <span>7$</span>
+                  <span>$7</span>
                 </Col>
               </div>
               <div className="product">
@@ -51,7 +56,7 @@ class Checkout extends React.PureComponent<PropsType> {
                   <FontAwesomeIcon icon="trash" className="mt-1" />
                 </Col>
                 <Col md={2}>
-                  <span>7$</span>
+                  <span>$7</span>
                 </Col>
               </div>
             </Row>
@@ -70,4 +75,4 @@ class Checkout extends React.PureComponent<PropsType> {
   }
 }
 
-export default Checkout;
+export default Carrito;
