@@ -20,7 +20,7 @@ class AdminProducts extends React.PureComponent<PropType> {
         </div>
         <Container>
           <div className="product-table">
-            <div className="table-title">
+            <div className="table-title ">
               <h2>Listado de productos</h2>
               <div>
                 <Button onClick={onNewProductClick} variant="success">Nuevo</Button>
