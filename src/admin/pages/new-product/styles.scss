@@ -1,0 +1,114 @@
+.product-page {
+  padding: 2rem 0;
+
+  .title-container {
+    .title {
+      margin: 9px 0;
+      color: #73879c;
+      font-weight: 500;
+      line-height: 1.2;
+      font-size: 1.75rem;
+    }
+  }
+  .create-product {
+    
+    .create-prod-title {
+      margin: 5px 0 6px;
+      display: flex;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: #73879c;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 2rem;
+    
+    }
+  }
+.btn-crear{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+  .product-category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .product-image {
+      max-width: 220px;
+    }
+    .card {
+      background: white;
+      padding-bottom: 30px;
+      min-height: 280px;
+      max-width: 280px;
+      margin-bottom: 30px;
+      transition: ease all 0.5s;
+      border-radius: 20px;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+        background-color: #f1f8e0;
+        transition: background-color 1000ms linear;
+      }
+
+      .card-img {
+        padding: 5 5 5 5;
+        max-width: 70%;
+        height: auto;
+        align-items: center;
+        display: block;
+        margin: auto;
+      }
+
+      .card-body {
+        position: relative;
+        padding-bottom: 0;
+        padding: 12px 0px;
+        color: black;
+        text-align: center;
+        font-family: "Open Sans", "Source Sans Pro", sans-serif;
+
+        .card-title {
+          border-radius: 8px;
+          font-size: 15px;
+          font-weight: 500;
+          transition: all 0.3s ease 0s;
+          letter-spacing: 0px;
+        }
+
+        .card-text {
+          font-weight: 620;
+
+          .actual-price {
+            font-size: 20px;
+            color: green;
+          }
+          .price-without-discount {
+            text-decoration: line-through;
+            padding-left: 1em;
+            color: grey;
+            font-size: 17px;
+          }
+        }
+        .btn-agregar {
+          width: 140px;
+          padding: 12px 0px;
+          background: #a6ce39;
+          color: #fff;
+          font-weight: 900;
+          border-radius: 4px;
+          text-transform: uppercase;
+          margin-top: 12px;
+          display: block;
+          text-decoration: none;
+          margin: auto;
+        }
+      }
+    }
+  }
+}
