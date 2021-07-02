@@ -42,6 +42,17 @@ class Dashboard extends React.PureComponent<PropTypes, StateType> {
   render() {
     const { user } = this.props;
     const { orders, topSellProducts } = this.state;
+
+    const reduceOrders = orders.reduce((p, c) => {
+      const status = c.status;
+      if (!p[status]) {
+        p[status] = 0;
+      }
+      p[status]++;
+      return p;
+    }, {} as any);
+
+    console.log(reduceOrders);
     return (
       <div className="dashboard">
         <Helmet>
@@ -57,8 +68,8 @@ class Dashboard extends React.PureComponent<PropTypes, StateType> {
             <h5>Productos con mas ventas este mes</h5>
             <div className="chart-container">
               <BarChart
-                width={600}
-                height={250}
+                width={800}
+                height={450}
                 data={topSellProducts.map((p) => {
                   return {
                     name: p.name,
@@ -90,13 +101,13 @@ class Dashboard extends React.PureComponent<PropTypes, StateType> {
             <h5>Ordenes creadas este mes</h5>
             <div className="chart-container">
               <BarChart
-                width={600}
-                height={250}
-                data={ orders.map((o) => {
+                width={800}
+                height={450}
+                data={Object.keys(reduceOrders).map((o) => {
                   return {
-                    count: orders.filter((x) => x.status === o.status).length,
-                    status: getStatusText(o.status),
-                  };
+                    status: getStatusText(o),
+                    count: reduceOrders[o],
+                  }
                 })}
                 margin={{
                   top: 5,
