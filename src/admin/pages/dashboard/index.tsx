@@ -9,42 +9,111 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import orderApi, { getStatusText, Order } from "../../../api/models/order";
+import productApi, { Product } from "../../../api/models/product";
+import { LoggedUser } from "../../../App";
 import "./styles.scss";
 
-class Dashboard extends React.PureComponent {
+interface PropTypes {
+  user?: LoggedUser;
+}
+
+interface StateType {
+  orders: Order[];
+  topSellProducts: Product[];
+}
+
+class Dashboard extends React.PureComponent<PropTypes, StateType> {
+  state: StateType = {
+    orders: [],
+    topSellProducts: [],
+  };
+
+  async componentDidMount() {
+    const orders = await orderApi.get();
+    const topSellProducts = await productApi.topSell();
+
+    this.setState({
+      orders,
+      topSellProducts,
+    });
+  }
+
   render() {
+    const { user } = this.props;
+    const { orders, topSellProducts } = this.state;
     return (
       <div className="dashboard">
         <Helmet>
           <title>Dashboard - Admin</title>
         </Helmet>
-        <h1>Bienvenido, Usuario</h1>
+        <h1>Bienvenido, {user?.email || "Usuario"}</h1>
         <h3>Este es tu dashboard</h3>
         <br />
         <br />
         <br />
-        <div>
-          <h5>Ventas de este mes</h5>
-          <div className="chart-container">
-            <BarChart
-              width={600}
-              height={250}
-              data={data}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar name="Productos en carrito" dataKey="pv" fill="#8884d8" />
-              <Bar name="Ventas por hacer" dataKey="uv" fill="#82ca9d" />
-            </BarChart>
+        <div className="chart-aligner">
+          <div>
+            <h5>Productos con mas ventas este mes</h5>
+            <div className="chart-container">
+              <BarChart
+                width={600}
+                height={250}
+                data={topSellProducts.map((p) => {
+                  return {
+                    name: p.name,
+                    ventasRealizadas: p.soldQuantity,
+                  };
+                })}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                {/* <Bar name="Productos en carrito" dataKey="pv" fill="#8884d8" /> */}
+                <Bar
+                  name="Ventas realizadas"
+                  dataKey="ventasRealizadas"
+                  fill="#82ca9d"
+                />
+              </BarChart>
+            </div>
+          </div>
+          <div>
+            <h5>Ordenes creadas este mes</h5>
+            <div className="chart-container">
+              <BarChart
+                width={600}
+                height={250}
+                data={ orders.map((o) => {
+                  return {
+                    count: orders.filter((x) => x.status === o.status).length,
+                    status: getStatusText(o.status),
+                  };
+                })}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="status" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar name="Total" dataKey="count" fill="#8884d8" />
+                {/* <Bar name="Creadas" dataKey="creadas" fill="#82ca9d" /> */}
+              </BarChart>
+            </div>
           </div>
         </div>
       </div>
@@ -53,36 +122,3 @@ class Dashboard extends React.PureComponent {
 }
 
 export default Dashboard;
-
-const data = [
-  {
-    name: "Enero",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Febrero",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Marzo",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Abril",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Mayo",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-];

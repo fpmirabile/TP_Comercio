@@ -1,11 +1,27 @@
 import { authenticatedGet, authenticatedPost } from "../calls"
 import { Product } from './product';
 
+export const getStatusText = (status: string) => {
+  switch (status) {
+    case "0":
+      return "SHIPPED";
+    case "1":
+      return "FAILED";
+    case "2":
+      return "PAID";
+    case "3":
+      return "CREATED"
+    default:
+      return "CANCEL";
+  }
+}
+
 export interface Order {
   id: string;
   status: string;
   comments: string;
   items: OrderItem[];
+  createdAt: string;
 }
 
 export interface OrderItem {

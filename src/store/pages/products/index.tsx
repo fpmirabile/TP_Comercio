@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import productApi, { Product } from "../../../api/models/product";
 import ProductCard from "../../common/product-card";
 import "./styles.scss";
@@ -38,7 +38,7 @@ class Products extends React.PureComponent<PropTypes, StateType> {
       search,
       onlyDiscount
     );
- 
+
     if (pagedProducts?.length) {
       const nextPage = await productApi.search(
         (resetPage || page) + 1,
@@ -114,31 +114,23 @@ class Products extends React.PureComponent<PropTypes, StateType> {
     const { products, hideShowMoreButton } = this.state;
     return (
       <div className="products-page">
-        <Container>
+        <Container className="container-xl">
           <div className="title">
             {onlyDiscount ? "Ofertas" : "Productos"}
             {categoryName && !onlyDiscount ? ` de ${categoryName}` : ""}
           </div>
-          <Row>
+          <div className="home-products-list">
             {products.map((product) => {
-              return (
-                <Col
-                  key={product.id}
-                  md={products.length === 1 ? 12 : 6}
-                  xs={12}
-                >
-                  {this.renderProduct(
-                    product.id,
-                    product.category.id,
-                    product.name,
-                    product.msrp,
-                    product.imageUrl,
-                    product.discount
-                  )}
-                </Col>
+              return this.renderProduct(
+                product.id,
+                product.category.id,
+                product.name,
+                product.msrp,
+                product.imageUrl,
+                product.discount
               );
             })}
-          </Row>
+          </div>
           {!hideShowMoreButton && (
             <Button
               className="show-more-products"

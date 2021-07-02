@@ -4,8 +4,9 @@ import Store from "./store";
 import Admin from "./admin";
 import { ToastContainer } from 'react-toastify';
 import "./App.scss";
-import { getSession } from "./api/session";
+import { getSession, setSession } from "./api/session";
 import userApi from "./api/models/user";
+import { LoginTokens } from "./api/models/auth";
 
 export type LoggedUser = {
   email: string;
@@ -33,7 +34,19 @@ export default class App extends React.PureComponent<{}, StateType> {
       this.setState({
         loggedUser: me,
       });
+    } else {
+      this.setState({
+        loggedUser: undefined,
+      })
     }
+  }
+
+  handleUserLogin = ({ tokens, user }: LoginTokens) => {
+    setSession({ jwt: tokens.token, refresh: tokens.refreshToken });
+    this.setState({
+      loggedUser: user,
+    });
+    window.me = user;
   }
 
   render() {
@@ -46,7 +59,7 @@ export default class App extends React.PureComponent<{}, StateType> {
             <Admin loggedAdmin={this.state.loggedUser} />
           </Route>
           <Route path="/">
-            <Store loggedUser={this.state.loggedUser} />
+            <Store onUserLogin={this.handleUserLogin} loggedUser={this.state.loggedUser} />
           </Route>
         </Switch>
       </BrowserRouter>

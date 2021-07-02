@@ -1,0 +1,47 @@
+.category-admin-form {
+  display: flex;
+  flex: 1;
+  margin-left: 5rem;
+  .create-category-title {
+    margin: 5px 0 6px;
+    display: flex;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #73879c;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .category-selector {
+    text-transform: capitalize;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 18px;
+  }
+
+  .btn-crear {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    &:hover {
+      background-color: blue;
+    }
+  }
+
+  .btn-cancelar {
+    margin: 2rem;
+    background-color: red;
+
+    &:hover {
+      background-color: blue;
+    }
+  }
+}

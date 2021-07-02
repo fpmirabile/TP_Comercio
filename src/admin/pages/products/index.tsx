@@ -7,6 +7,7 @@ import "./styles.scss";
 
 interface PropType {
   onNewProductClick: () => void;
+  onProductEditClick: (id: string) => void;
 }
 
 interface StateType {
@@ -54,6 +55,7 @@ class AdminProducts extends React.PureComponent<PropType> {
         progress: undefined,
         style: { top: 50 },
       });
+      this.handleLoadProducts();
     } else {
       toast.error("No se pudo eliminar el producto", {
         position: "top-center",
@@ -67,6 +69,10 @@ class AdminProducts extends React.PureComponent<PropType> {
       });
     }
   };
+
+  selectProductToEdit = (id: string) => () => {
+    this.props.onProductEditClick(id);
+  }
 
   render() {
     const { products } = this.state;
@@ -113,7 +119,7 @@ class AdminProducts extends React.PureComponent<PropType> {
                             : "No tiene"}
                         </td>
                         <td className="product-action-buttons">
-                          <Button variant="info">Editar</Button>
+                          <Button onClick={this.selectProductToEdit(product.id)} variant="info">Editar</Button>
                           <Button
                             onClick={this.handleDeleteProduct(product)}
                             variant="danger"

@@ -18,8 +18,8 @@ const deleteCategoryById = (productId: string): Promise<DeleteResponse> => {
   return authenticatedDelete(`/category/${productId}`);
 }
 
-const updateCategory = (prod: Category): Promise<Category> => {
-  return authenticatedPut("/category", prod);
+const updateCategory = (id: string, name: string): Promise<Category> => {
+  return authenticatedPut("/category", { id, name });
 }
 
 const createCategory = async (name: string): Promise<Category> => {

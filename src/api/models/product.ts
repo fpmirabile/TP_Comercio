@@ -9,6 +9,7 @@ export interface Product {
   discount?: number;
   stock: number;
   imageUrl?: string;
+  soldQuantity: number;
   category: Category;
 }
 
@@ -20,18 +21,19 @@ const deleteProductById = (productId: string): Promise<DeleteResponse> => {
   return authenticatedDelete(`/products/${productId}`)
 }
 
-const updateProduct = (prod: Product): Promise<Product> => {
-  return authenticatedPut("/products", prod);
+const updateProduct = (id:string, name: string, stock: number, price: number, categoryId: string, discount?: number, image?: string): Promise<Product> => {
+  return authenticatedPut("/products", { id, name, stock, price, categoryId, image, discount });
 }
 
-const createProduct = async (name: string, stock: number, price: number, discount: number, categoryId: string, image?: string): Promise<Product> => {
+const createProduct = async (name: string, stock: number, price: number, categoryId: string, discount?: number, image?: string): Promise<Product> => {
   const newProduct = {
     name,
+    active: true,
     stock,
     price,
     discount,
     categoryId,
-    image
+    image,
   };
 
   return authenticatedPost("/products", newProduct)

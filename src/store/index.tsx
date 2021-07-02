@@ -14,25 +14,16 @@ import Products from "./pages/products";
 import ModalContainer from "./modal-container";
 import NotFound from "./pages/error-pages/not-found";
 import Checkout from "./pages/final-checkout/index";
-import { LoginTokens } from "../api/models/auth";
-import { setSession } from "../api/session";
 import AboutUs from "./pages/about-us";
 import { LoggedUser } from "../App";
+import { LoginTokens } from "../api/models/auth";
 
 interface PropTypes extends RouteComponentProps {
   loggedUser?: LoggedUser;
+  onUserLogin: (login: LoginTokens) => void;
 }
 
 class Store extends React.PureComponent<PropTypes> {
-
-  handleUserLogin = ({ tokens, user }: LoginTokens) => {
-    setSession({ jwt: tokens.token, refresh: tokens.refreshToken });
-    this.setState({
-      loggedUser: user,
-    });
-    window.me = user;
-  };
-
   handleCheckoutEnd = () => {
     const { history, location } = this.props;
     history.push("/modals/alerta", { background: location });
@@ -51,7 +42,7 @@ class Store extends React.PureComponent<PropTypes> {
   }
 
   render() {
-    const { location, match, loggedUser } = this.props;
+    const { location, match, loggedUser, onUserLogin } = this.props;
     const isAdmin = loggedUser?.isAdmin || false;
     const background = location.state && location.state.background;
     const categoryName =
@@ -92,7 +83,7 @@ class Store extends React.PureComponent<PropTypes> {
         {background && (
           <Route
             path={`/modals/:name`}
-            children={<ModalContainer onLogin={this.handleUserLogin} />}
+            children={<ModalContainer onLogin={onUserLogin} />}
           />
         )}
         <Footer />

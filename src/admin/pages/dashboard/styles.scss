@@ -1,7 +1,13 @@
 .dashboard {
+  height: 100vh;
+  .chart-container {
+    border: 1px solid lightblue;
+    max-width: fit-content;
+  }
 
-    .chart-container {
-        border: 1px solid lightblue;
-        max-width: fit-content;
-    }
+  .chart-aligner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 }

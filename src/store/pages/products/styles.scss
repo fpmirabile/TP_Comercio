@@ -5,6 +5,22 @@
     align-items: center;
     justify-content: center;
 
+    &.container-xl {
+      max-width: 1800px !important;
+    }
+
+    .home-products-list {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-flow: row wrap;
+
+      .product-category {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    }
+
     .title {
       color: #212121 !important;
       padding-bottom: 0.5em;

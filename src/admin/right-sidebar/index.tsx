@@ -30,6 +30,11 @@ class LeftBar extends React.PureComponent<PropType> {
     history.push("/");
   }
 
+  handleCategoryClick = () => {
+    const { history, match } = this.props;
+    history.push(`${match.url}/categories`)
+  }
+
   render() {
     const { expandedSidebar } = this.props;
     const rightBarClasses = classNames("right-bar", {
@@ -65,6 +70,12 @@ class LeftBar extends React.PureComponent<PropType> {
                     <Button onClick={this.handleProductClick} className="btn-admin-link">
                       <FontAwesomeIcon icon="shopping-cart" />
                       <span className="button-title">Productos</span>
+                    </Button>
+                  </li>
+                  <li className="admin-link-section">
+                    <Button onClick={this.handleCategoryClick} className="btn-admin-link">
+                      <FontAwesomeIcon icon="list-ul" />
+                      <span className="button-title">Categorias</span>
                     </Button>
                   </li>
                   <li className="admin-link-section">
