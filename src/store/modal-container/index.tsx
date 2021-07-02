@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import Login from "./login";
 import SignUp from "./sign-up";
-import Carrito from "./carrito";
+import Cart from "./cart";
 import Confirm from "./confirm";
 import OperationOK from "./alerta";
 import { LoginTokens } from "../../api/models/auth";
@@ -41,7 +41,7 @@ class ModalContainer extends React.PureComponent<PropTypes, StateProps> {
 
   handleCheckout = () => {
     const { history } = this.props;
-    history.push("/checkout");
+    history.push("/create-order");
   };
 
   handleConfirm = () => {
@@ -70,11 +70,7 @@ class ModalContainer extends React.PureComponent<PropTypes, StateProps> {
         )}
         {name === "sign-up" && <SignUp onClose={this.handleClose} />}
         {name === "checkout" && (
-          <Carrito
-            productos={[]}
-            onClose={this.handleClose}
-            onCheckout={this.handleCheckout}
-          />
+          <Cart onClose={this.handleClose} onCheckout={this.handleCheckout} />
         )}
         {name === "confirm" && (
           <Confirm onClose={this.handleClose} onConfirm={this.handleConfirm} />
@@ -83,7 +79,7 @@ class ModalContainer extends React.PureComponent<PropTypes, StateProps> {
           <OperationOK
             onClose={this.handleClose}
             operationNumber="999234782"
-            type="danger"
+            type="success"
           />
         )}
       </Modal>

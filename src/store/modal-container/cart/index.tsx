@@ -1,7 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import classNames from "classnames";
 import * as React from "react";
-import { Modal, Row, Col, Form, Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
+import ProductCart from "../../common/product-cart";
 import cartApi, { CartItem } from "../../../api/models/cart";
 import "./styles.scss";
 
@@ -21,19 +20,20 @@ class Carrito extends React.PureComponent<PropsType, StateType> {
 
   async componentDidMount() {
     const cart = await cartApi.get();
-    this.setState({
-      cartItems: cart.items,
-    });
+    if (cart) {
+      this.setState({
+        cartItems: cart.items,
+      });
+    }
   }
 
   handleCheckOut = () => {
     const { onCheckout } = this.props;
-    //Validar el carrito
     onCheckout();
   };
 
   handleQuantityOnItem =
-    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    (index: number) => async (e: React.ChangeEvent<HTMLInputElement>) => {
       const quantity = Number(e.target.value);
       if (isNaN(quantity) || quantity < 1) {
         return;
@@ -44,8 +44,8 @@ class Carrito extends React.PureComponent<PropsType, StateType> {
       currentItem.quantity = quantity;
       currentItem.price = currentItem.product.msrp * quantity;
       if (currentItem.discount) {
-        currentItem.discount = (currentItem.product.discount || 0) * quantity
-      }      
+        currentItem.discount = (currentItem.product.discount || 0) * quantity;
+      }
 
       items[index] = currentItem;
       // Creo una copia del array, para reemplazar los punteros
@@ -53,52 +53,30 @@ class Carrito extends React.PureComponent<PropsType, StateType> {
       this.setState({
         cartItems: newArray,
       });
+      await cartApi.update;
     };
 
   handleRemoveProduct = (prodId: string) => async () => {
-  await cartApi.deleteItem(prodId);
+    await cartApi.deleteItem(prodId);
     const newCartItems = await cartApi.get();
     this.setState({
       cartItems: newCartItems.items,
-    })
+    });
   };
 
   renderProduct = (cartItem: CartItem, index: number) => {
     return (
-      <div key={cartItem.product.id} className="product">
-        <Col md={6}>
-          <div className="product-name">{cartItem.product.name}</div>
-          <span className="discount">
-            Descuento de ${cartItem.price - cartItem.discount}
-          </span>
-        </Col>
-        <Col md={2}>
-          <Form.Control
-            onChange={this.handleQuantityOnItem(index)}
-            value={cartItem.quantity}
-            type="number"
-            as="input"
-          />
-        </Col>
-        <Col
-          onClick={this.handleRemoveProduct(cartItem.product.id)}
-          md={2}
-          className="remove"
-        >
-          <FontAwesomeIcon icon="trash" className="mt-1" />
-        </Col>
-        <Col md={2}>
-          <span>${cartItem.discount ? cartItem.discount : cartItem.price}</span>
-        </Col>
-      </div>
+      <ProductCart
+        key={cartItem.product.id}
+        item={cartItem}
+        onQuantityChange={this.handleQuantityOnItem(index)}
+        onRemoveProduct={this.handleRemoveProduct(cartItem.product.id)}
+      />
     );
   };
 
   render() {
     const { cartItems } = this.state;
-    const rowClassName = classNames("products", {
-      "more-than-one": cartItems.length > 1,
-    });
     const cartTotal = cartItems.reduce(
       (sum, current) =>
         sum + (current.discount ? current.discount : current.price),
@@ -111,20 +89,34 @@ class Carrito extends React.PureComponent<PropsType, StateType> {
         </Modal.Header>
         <Modal.Body>
           <div className="checkout-items-container">
-            <Row className={rowClassName}>
-              {cartItems.map((item, index) => {
-                return this.renderProduct(item, index);
-              })}
-            </Row>
+            {cartItems.length === 0 && (
+              <div className="no-items">
+                <span className="legend">
+                  Aun no se encuentran elementos en el carrito!
+                </span>
+                <span className="legend">
+                  Aprovecha a comprar en nuestra tienda &#x1F600;
+                </span>
+              </div>
+            )}
+            {cartItems.map((item, index) => {
+              return this.renderProduct(item, index);
+            })}
           </div>
-          <div className="control-container">
-            <div className="total">Total ${cartTotal}</div>
-            <div className="button-container">
-              <Button className="btn-pay" onClick={this.handleCheckOut}>
-                Pagar
-              </Button>
+          {cartItems.length > 0 && (
+            <div className="control-container">
+              <div className="total">Total ${cartTotal}</div>
+              <div className="button-container">
+                <Button
+                  disabled={cartItems.length === 0}
+                  className="btn-pay"
+                  onClick={this.handleCheckOut}
+                >
+                  Pagar
+                </Button>
+              </div>
             </div>
-          </div>
+          )}
         </Modal.Body>
       </div>
     );

@@ -11,6 +11,7 @@ interface PropTypes {
   title: string;
   discount?: number;
   price: number;
+  enableAddButton: boolean;
 }
 
 class ProductCard extends React.PureComponent<PropTypes> {
@@ -30,13 +31,13 @@ class ProductCard extends React.PureComponent<PropTypes> {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        style: { top: 50 }
+        style: { top: 50 },
       });
     }
   };
 
   render() {
-    const { imageName, title, discount, price } = this.props;
+    const { imageName, title, discount, price, enableAddButton } = this.props;
     return (
       <div className="product-category">
         <Card>
@@ -61,7 +62,11 @@ class ProductCard extends React.PureComponent<PropTypes> {
                 <span className="price-without-discount">${price}</span>
               )}
             </Card.Text>
-            <Button onClick={this.handleAddToCart} className="btn-agregar">
+            <Button
+              disabled={!enableAddButton}
+              onClick={this.handleAddToCart}
+              className="btn-agregar"
+            >
               Agregar
             </Button>
           </Card.Body>

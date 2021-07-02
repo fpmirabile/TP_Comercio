@@ -1,44 +1,87 @@
 .final-checkout {
-  .container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+
+  .form-and-list {
     display: flex;
-    flex-flow: column wrap;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    justify-content: center;
+    width: 80%;
 
-    .title {
-      color: #212121 !important;
-      padding-bottom: 0.5em;
-      padding-top:20px;
-      position: relative;
-      font-size: 2.5em;
-      margin-bottom: 2rem;
+    .list {
+      align-self: flex-start;
+      background-color: white;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 2rem 2rem 1rem 2rem;
 
-      &::after {
-        content: "";
-        background: #fa1818 !important;
-        height: 2px;
-        width: 100%;
-        position: absolute;
-        bottom: 10%;
-        left: 0;
-      }
-    }
-    form {
-      padding-bottom:100px;
-      .form-group {
-        input {
-          &::placeholder {
-            color: #A4A4A4;
-            //text-align: center;
-          }
+      .product-separator {
+        &:not(:last-child) {
+          border-bottom: 1px solid gray;
+          padding-bottom: 15px;
         }
       }
-      .line{
-        background-color: #A4A4A4;
-        padding-bottom: 2px;
-        margin-top :20px;
-        margin-bottom: 30px;
+
+      .total {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        margin-top: 15px;
+        .total-sum {
+          font-size: 18px;
+          color: black;
+        }
+      }
     }
   }
-}
+
+  .title {
+    color: #212121 !important;
+    padding-bottom: 0.5em;
+    padding-top: 20px;
+    position: relative;
+    font-size: 2.5em;
+    margin-bottom: 2rem;
+
+    &::after {
+      content: "";
+      background: #fa1818 !important;
+      height: 2px;
+      width: 100%;
+      position: absolute;
+      bottom: 10%;
+      left: 0;
+    }
+  }
+  form {
+    padding-bottom: 100px;
+
+    .error-message {
+      max-width: 500px;
+      margin-bottom: 25px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .terms {
+      margin: 1rem 0;
+    }
+    .form-group {
+      input {
+        &::placeholder {
+          color: #a4a4a4;
+          //text-align: center;
+        }
+      }
+    }
+    .line {
+      background-color: #a4a4a4;
+      padding-bottom: 2px;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+  }
 }

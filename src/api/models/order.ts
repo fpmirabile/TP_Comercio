@@ -1,5 +1,4 @@
-import { authenticatedGet, authenticatedPost, authenticatedPut } from "../calls"
-import { DeleteResponse } from "../common"
+import { authenticatedGet, authenticatedPost } from "../calls"
 import { Product } from './product';
 
 export interface Order {
@@ -24,12 +23,12 @@ const getOrderById = (orderId: string): Promise<Order> => {
   return authenticatedGet(`/orders/${orderId}`);
 }
 
-const updateCart = (comments: string, cartId: string): Promise<Order> => {
+const buyCart = (comments: string, cartId: string): Promise<Order> => {
   return authenticatedPost("/orders", { comments, cartId });
 }
 
 const orderApi = {
-  update: updateCart,
+  buyCart,
   deleteItem: getOrderById,
   get: getAllOrders,
 }

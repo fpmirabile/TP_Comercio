@@ -6,14 +6,15 @@ interface PropTypes {
   isAdmin: boolean;
   onCartClick: () => void;
   onAdminClick: () => void;
+  disabledCartButton: boolean;
 }
 
 class RightButtons extends React.PureComponent<PropTypes> {
   render() {
-    const { isAdmin, onCartClick, onAdminClick } = this.props;
+    const { disabledCartButton, isAdmin, onCartClick, onAdminClick } = this.props;
     return (
       <div className="cart-button">
-        <Button className="btn-carrito" onClick={onCartClick}>
+        <Button disabled={disabledCartButton} className="btn-carrito" onClick={onCartClick}>
             Ir al carrito    
             <img alt="imagen" src={require("../../../../../assets/images/cart.png").default} />
         </Button>

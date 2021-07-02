@@ -9,6 +9,14 @@
     border-radius: 4px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 20);
 
+    .no-items {
+      margin: 1rem;
+      .legend {
+        font-size: 16px;
+        color: black;
+        display: block;
+      }
+    }
     .products {
       &.more-than-one {
         .product {
@@ -16,34 +24,6 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid #f2f2f2;
           }
-        }
-      }
-      .product {
-        display: flex;
-        margin-top: 1rem;
-        .product-name {
-          color: #212121;
-          font-size: 1em;
-          display: block;
-          margin-bottom: 0.5em;
-          text-transform: capitalize;
-          line-break: auto;
-          word-break: break-word;
-        }
-
-        .discount {
-          display: block;
-          margin: 0;
-          padding: 0;
-          box-shadow: none;
-          color: #999;
-          font-size: 12px;
-          line-height: 22px;
-        }
-
-        .remove {
-          display: flex;
-          justify-content: center;
         }
       }
     }

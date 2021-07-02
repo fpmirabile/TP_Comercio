@@ -5,6 +5,7 @@ import "./styles.scss";
 
 interface PropTypes {
   isAdmin: boolean;
+  disabledCartButton: boolean;
   onCartClick: () => void;
   onAdminClick: () => void;
   onSearchClick: (searched: string) => void;
@@ -33,7 +34,7 @@ class SearchForm extends React.PureComponent<PropTypes, StateType> {
   handleSearchButtonClick = () => this.props.onSearchClick(this.state.search);
 
   render() {
-    const { isAdmin, onCartClick, onAdminClick } = this.props;
+    const { isAdmin, onCartClick, onAdminClick, disabledCartButton } = this.props;
     return (
       <div className="search-form">
         <Form className="navbar-form" inline onSubmit={this.handleOnSubmit}>
@@ -53,6 +54,7 @@ class SearchForm extends React.PureComponent<PropTypes, StateType> {
           isAdmin={isAdmin}
           onAdminClick={onAdminClick}
           onCartClick={onCartClick}
+          disabledCartButton={disabledCartButton}
         />
       </div>
     );

@@ -33,6 +33,7 @@ class Nav extends React.PureComponent<PropType> {
 
   render() {
     const { location, isLogged, isAdmin } = this.props;
+    const disabledCartButton = location.pathname.includes('create-order')
     return (
       <div className="nav">
         <Navbar fixed="top" bg="light" expand="lg">
@@ -45,6 +46,7 @@ class Nav extends React.PureComponent<PropType> {
             isAdmin={isAdmin}
             onAdminClick={this.handleAdminClick}
             onCartClick={this.handleOnCartClick}
+            disabledCartButton={disabledCartButton}
           />
           <RightBar isLogged={isLogged} location={location} />
         </Navbar>

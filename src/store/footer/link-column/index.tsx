@@ -20,7 +20,7 @@ class LinkColumn extends React.PureComponent<PropsType> {
         <h4 className="title">{title}</h4>
         <ul className="list">
           {links.map((link) => (
-            <li className="list-link">
+            <li key={link.link} className="list-link">
               <NavLink className="nav-link" to={link.link}>
                 {link.title}
               </NavLink>

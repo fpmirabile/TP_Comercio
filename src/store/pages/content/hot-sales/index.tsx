@@ -7,7 +7,11 @@ interface StateType {
   products: Product[];
 }
 
-class HotSales extends React.PureComponent {
+interface PropTypes {
+  enableAddButton: boolean;
+}
+
+class HotSales extends React.PureComponent<PropTypes, StateType> {
   state: StateType = {
     products: [],
   };
@@ -24,6 +28,7 @@ class HotSales extends React.PureComponent {
 
   render() {
     const { products } = this.state;
+    const { enableAddButton } = this.props;
     return (
       <div className="hot-sales-container">
         <div className="title">Los más vendidos</div>
@@ -31,11 +36,13 @@ class HotSales extends React.PureComponent {
           {products.map((product) => {
             return (
               <ProductCard
+                key={product.id}
                 id={product.id}
                 title={product.name}
                 imageName={product.imageUrl}
                 discount={product.discount}
                 price={product.msrp}
+                enableAddButton={enableAddButton}
               />
             );
           })}

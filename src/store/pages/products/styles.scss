@@ -23,6 +23,14 @@
         left: 0;
       }
     }
+
+    .no-products {
+      margin: 2rem 0;
+      .legends {
+        color: black;
+        font-size: 16px;
+      }
+    }
   }
 
   .show-more-products {

@@ -26,8 +26,13 @@ const updateCart = (prodId: string, quantity: number): Promise<Cart> => {
   return authenticatedPut("/cart", { prodId, quantity });
 }
 
+const updateCartItem = (prodId: string, quantity: number) => {
+  return authenticatedPut(`/cart/item/${prodId}`, { quantity })
+}
+
 const cartApi = {
   update: updateCart,
+  updateQuantity: updateCartItem,
   deleteItem: deleteItemFromCart,
   get: getCart,
 }

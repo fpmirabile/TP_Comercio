@@ -19,7 +19,7 @@ import { getSession, setSession } from "../api/session";
 import userApi from "../api/models/user";
 import AboutUs from "./pages/about-us";
 
-type LoggedUser = {
+export type LoggedUser = {
   email: string;
   id: string;
   isAdmin: boolean;
@@ -51,6 +51,16 @@ class Store extends React.PureComponent<RouteComponentProps, StateType> {
     });
   };
 
+  handleCheckoutEnd = () => {
+    const { history, location } = this.props;
+    history.push("/modals/alerta", { background: location });
+  };
+
+  handleRedirectToHomePage = () => {
+    const { history } = this.props;
+    history.push("/");
+  };
+
   render() {
     const { location, match } = this.props;
     const { loggedUser } = this.state;
@@ -65,20 +75,25 @@ class Store extends React.PureComponent<RouteComponentProps, StateType> {
         <Header isAdmin={isAdmin} isLogged={!!loggedUser} />
         <ToastContainer />
         <Switch location={background || location}>
-          <Route path={`${match.url}products`}>
-            <Products categoryName={categoryName} search={search} />
-          </Route>
-          <Route path={`${match.url}deals`}>
-            <Products onlyDiscount />
+          <Route path={[`${match.url}products`, `${match.url}deals`]}>
+            <Products
+              enableAddButton={!!loggedUser}
+              categoryName={categoryName}
+              search={search}
+              onlyDiscount={location.pathname.indexOf("deals") > 0}
+            />
           </Route>
           <Route path={`${match.url}about-us`}>
             <AboutUs />
           </Route>
-          <Route path={`${match.url}checkout`}>
-            <Checkout />
+          <Route path={`${match.url}create-order`}>
+            <Checkout
+              onRedirectToHome={this.handleRedirectToHomePage}
+              onCheckoutEnd={this.handleCheckoutEnd}
+            />
           </Route>
           <Route path={`${match.url}/`}>
-            <PageContent />
+            <PageContent loggedUser={loggedUser} />
           </Route>
           <Route path="*">
             <NotFound />

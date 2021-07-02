@@ -16,6 +16,7 @@ interface PropTypes {
   categoryId?: string;
   categoryName?: string;
   search?: string;
+  enableAddButton: boolean;
 }
 
 class Products extends React.PureComponent<PropTypes, StateType> {
@@ -39,15 +40,21 @@ class Products extends React.PureComponent<PropTypes, StateType> {
     );
 
     if (pagedProducts?.length) {
+      const nextPage = await productApi.search(
+        resetPage || page + 1,
+        pageSize,
+        categoryId,
+        categoryName,
+        search,
+        onlyDiscount
+      );
+
       this.setState((prevState) => {
         return {
           products: prevState.products.concat(pagedProducts),
-          page: resetPage || page
+          page: resetPage || page,
+          hideShowMoreButton: !!nextPage,
         };
-      });
-    } else {
-      this.setState({
-        hideShowMoreButton: true,
       });
     }
   };
@@ -59,11 +66,21 @@ class Products extends React.PureComponent<PropTypes, StateType> {
     }
   }
 
+  cleanProducts = () => {
+    this.setState({
+      products: [],
+    });
+  };
+
   // Necesitamos reworkear esto
-  UNSAFE_componentWillReceiveProps(next: PropTypes) {
-    if (this.props.search !== next.search) {
-      this.handleLoadProducts(0);
-    }
+  componentDidUpdate(next: PropTypes) {
+    const propsKeys = Object.keys(this.props) as Array<keyof PropTypes>;
+    propsKeys.forEach((key) => {
+      if (this.props[key] !== next[key]) {
+        this.cleanProducts();
+        this.handleLoadProducts(0);
+      }
+    });
   }
 
   handleLoadMore = () => {
@@ -79,40 +96,48 @@ class Products extends React.PureComponent<PropTypes, StateType> {
     image?: string,
     discount?: number
   ) => {
+    const { enableAddButton } = this.props;
     return (
-      <Col key={catId} md={3} sm={6} xs={12}>
-        <ProductCard
-          id={prodId}
-          title={productName}
-          imageName={image}
-          discount={discount}
-          price={price}
-        />
-      </Col>
+      <ProductCard
+        id={prodId}
+        title={productName}
+        imageName={image}
+        discount={discount}
+        price={price}
+        enableAddButton={enableAddButton}
+      />
     );
   };
 
   render() {
-    const { categoryName } = this.props;
+    const { categoryName, onlyDiscount } = this.props;
     const { products, hideShowMoreButton } = this.state;
     return (
       <div className="products-page">
         <Container>
           <div className="title">
-            Productos
-            {categoryName ? ` de ${categoryName}` : ''}
+            {onlyDiscount ? "Ofertas" : "Productos"}
+            {categoryName && !onlyDiscount ? ` de ${categoryName}` : ""}
           </div>
           <Row>
-            {products.map((product) =>
-              this.renderProduct(
-                product.id,
-                product.category.id,
-                product.name,
-                product.msrp,
-                product.imageUrl,
-                product.discount
-              )
-            )}
+            {products.map((product) => {
+              return (
+                <Col
+                  key={product.id}
+                  md={products.length === 1 ? 12 : 6}
+                  xs={12}
+                >
+                  {this.renderProduct(
+                    product.id,
+                    product.category.id,
+                    product.name,
+                    product.msrp,
+                    product.imageUrl,
+                    product.discount
+                  )}
+                </Col>
+              );
+            })}
           </Row>
           {!hideShowMoreButton && (
             <Button
@@ -121,6 +146,13 @@ class Products extends React.PureComponent<PropTypes, StateType> {
             >
               Mostrar más
             </Button>
+          )}
+          {products.length === 0 && (
+            <div className="no-products">
+              <span className="legends">
+                No se encuentran productos en esta categoria &#x1F605;
+              </span>
+            </div>
           )}
         </Container>
       </div>
