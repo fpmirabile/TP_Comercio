@@ -15,6 +15,7 @@ import Checkout from "./pages/final-checkout/index";
 import { LoginTokens } from "../api/models/auth";
 import { getSession, setSession } from "../api/session";
 import userApi from "../api/models/user";
+import AboutUs from "./pages/about-us"
 
 type LoggedUser = {
   email: string;
@@ -60,7 +61,10 @@ class Store extends React.PureComponent<RouteComponentProps, StateType> {
           <Route path={`${match.url}products`}>
             <Products title="Productos" />
           </Route>
-          <Route path={`${match.url}checkout`}>
+          <Route path={`${match.url}about-us`}>
+            <AboutUs />
+          </Route>
+          <Route path={`${match.url}checkout`} >
             <Checkout />
           </Route>
           <Route path={`${match.url}/`}>
