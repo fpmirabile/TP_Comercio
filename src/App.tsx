@@ -41,6 +41,12 @@ export default class App extends React.PureComponent<{}, StateType> {
     }
   }
 
+  handleLogout = () => {
+    this.setState({
+      loggedUser: undefined,
+    });
+  }
+
   handleUserLogin = ({ tokens, user }: LoginTokens) => {
     setSession({ jwt: tokens.token, refresh: tokens.refreshToken });
     this.setState({
@@ -59,7 +65,7 @@ export default class App extends React.PureComponent<{}, StateType> {
             <Admin loggedAdmin={this.state.loggedUser} />
           </Route>
           <Route path="/">
-            <Store onUserLogin={this.handleUserLogin} loggedUser={this.state.loggedUser} />
+            <Store onLogout={this.handleLogout} onUserLogin={this.handleUserLogin} loggedUser={this.state.loggedUser} />
           </Route>
         </Switch>
       </BrowserRouter>

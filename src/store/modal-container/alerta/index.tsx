@@ -3,7 +3,7 @@ import { Button, Alert } from "react-bootstrap";
 import "./styles.scss";
 
 interface PropsType {
-  onClose: () => void;
+  onConfirm: () => void;
   operationNumber: string;
   type: string;
 }
@@ -21,7 +21,7 @@ class OperationOK extends React.PureComponent<PropsType, any> {
 
   render() {
     const { operationNumber } = this.props;
-    const { onClose } = this.props;
+    const { onConfirm } = this.props;
     if (this.state.type === "success") {
       return (
         <Alert show={this.state.show} variant={this.state.type}>
@@ -37,7 +37,7 @@ class OperationOK extends React.PureComponent<PropsType, any> {
           <p>¡Muchas gracias por confiar en nosotros!</p>
           <hr />
           <div className="d-flex justify-content-end">
-            <Button variant="outline-success" onClick={onClose}>
+            <Button variant="outline-success" onClick={onConfirm}>
               Cerrar
             </Button>
           </div>
@@ -54,7 +54,7 @@ class OperationOK extends React.PureComponent<PropsType, any> {
           <p>Reintente nuevamente en unos minutos.</p>
           <hr />
           <div className="d-flex justify-content-end">
-            <Button variant="outline-danger" onClick={onClose}>
+            <Button variant="outline-danger" onClick={onConfirm}>
               Cerrar
             </Button>
           </div>

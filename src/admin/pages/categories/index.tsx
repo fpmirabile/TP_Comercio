@@ -85,7 +85,7 @@ class Categories extends React.PureComponent<RouteComponentProps, StateType> {
               </table>
               {!categories.length && (
                 <div className="no-data-loaded">
-                  <span>No hay productos cargados</span>
+                  <span>No hay categorias cargadas</span>
                 </div>
               )}
             </div>

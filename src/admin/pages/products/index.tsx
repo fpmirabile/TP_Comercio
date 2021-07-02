@@ -102,6 +102,7 @@ class AdminProducts extends React.PureComponent<PropType> {
                     <th>SKU</th>
                     <th>Nombre</th>
                     <th>Precio</th>
+                    <th className="product-column-right">Stock</th>
                     <th className="product-column-right">Precio descuento</th>
                     <th style={{ textAlign: "right" }}>Acciones</th>
                   </tr>
@@ -113,6 +114,7 @@ class AdminProducts extends React.PureComponent<PropType> {
                         <td>{product.id}</td>
                         <td>{product.name}</td>
                         <td>${product.msrp}</td>
+                        <td className="product-column-right">{product.stock}</td>
                         <td className="product-column-right">
                           {product.discount
                             ? `$${product.discount}`

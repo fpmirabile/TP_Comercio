@@ -52,7 +52,6 @@ class Dashboard extends React.PureComponent<PropTypes, StateType> {
       return p;
     }, {} as any);
 
-    console.log(reduceOrders);
     return (
       <div className="dashboard">
         <Helmet>

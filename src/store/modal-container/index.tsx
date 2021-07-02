@@ -54,6 +54,11 @@ class ModalContainer extends React.PureComponent<PropTypes, StateProps> {
     history.push("/alerta");
   };
 
+  handleGoToHomePage = () => {
+    const { history } = this.props;
+    history.push("");
+  }
+
   render() {
     const { match, onLogin } = this.props;
     const { show } = this.state;
@@ -77,7 +82,7 @@ class ModalContainer extends React.PureComponent<PropTypes, StateProps> {
         )}
         {name === "alerta" && (
           <OperationOK
-            onClose={this.handleClose}
+            onConfirm={this.handleGoToHomePage}
             operationNumber="999234782"
             type="success"
           />

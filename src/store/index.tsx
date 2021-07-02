@@ -21,6 +21,7 @@ import { LoginTokens } from "../api/models/auth";
 interface PropTypes extends RouteComponentProps {
   loggedUser?: LoggedUser;
   onUserLogin: (login: LoginTokens) => void;
+  onLogout: () => void;
 }
 
 class Store extends React.PureComponent<PropTypes> {
@@ -35,9 +36,8 @@ class Store extends React.PureComponent<PropTypes> {
   };
 
   handleLogout = () => {
-    this.setState({
-      loggedUser: undefined,
-    });
+    const { onLogout } = this.props;
+    onLogout();
     this.handleRedirectToHomePage();
   }
 

@@ -21,7 +21,8 @@ type DatosUsuario = {
 type Tarjeta = {
   nombre: string;
   numero: string;
-  vencimiento: string;
+  mesVencimiento: string;
+  yearVencimiento: string;
   csc: string;
 };
 
@@ -55,7 +56,8 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
     tarjeta: {
       nombre: "",
       numero: "",
-      vencimiento: "",
+      mesVencimiento: "",
+      yearVencimiento: "",
       csc: "",
     },
     hasErrors: false,
@@ -122,10 +124,37 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
       campos.push("numero de tarjeta no valido");
     }
 
-    if (tarjeta.vencimiento.length !== 5) {
+    const yearVencimiento = Number('20' + tarjeta.yearVencimiento)
+    if (isNaN(yearVencimiento)) {
       error = true;
-      campos.push("vencimiento tarjeta no valido");
+      campos.push("vencimiento tarjeta, año no valida");
     }
+
+    if (yearVencimiento < 0) {
+      error = true
+      campos.push("vencimiento tarjeta, año no valido");
+    } 
+
+    const mesVencimiento = Number(tarjeta.mesVencimiento)
+    if (isNaN(mesVencimiento)) {
+      error = true;
+      campos.push("vencimiento tarjeta, mes no valido");
+    }
+
+    if (mesVencimiento > 12 || mesVencimiento < 1) {
+      error = true
+      campos.push("vencimiento tarjeta, mes no valido");
+    } 
+
+    if (!error) {
+      const today = new Date();
+      const fechaExpiracion = new Date(yearVencimiento, mesVencimiento - 1, today.getDate());
+      if (fechaExpiracion < today) {
+        error = true;
+        campos.push("La fecha de vencimiento no es correcta.")
+      }
+    }
+
 
     if (tarjeta.csc.length !== 3) {
       error = true;
@@ -200,7 +229,6 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
             onSubmit={this.handleSubmit}
             autoComplete="off"
           >
-            <div className="error-message">{this.state.errorMessage}</div>
             <Form.Row>
               <Form.Group as={Col} md="4" controlId="Nombre">
                 <Form.Label>Nombre</Form.Label>
@@ -250,6 +278,10 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
                   value={this.state.usuario.documento}
                   placeholder="12345678"
                   onChange={(e) => {
+                    if (isNaN(Number(e.target.value))) {
+                      return;
+                    }
+
                     this.setState({
                       usuario: {
                         ...this.state.usuario,
@@ -284,13 +316,18 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} md="1" id="piso" controlId="piso">
+              <Form.Group as={Col} md="2" id="piso" controlId="piso">
                 <Form.Label>Piso</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="-"
+                  width={100}
                   value={this.state.usuario.piso}
                   onChange={(e) => {
+                    if (isNaN(Number(e.target.value))) {
+                      return;
+                    }
+                    
                     this.setState({
                       usuario: {
                         ...this.state.usuario,
@@ -430,6 +467,10 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
                 <Form.Control
                   value={this.state.tarjeta.numero}
                   onChange={(e) => {
+                    if (isNaN(Number(e.target.value))) {
+                      return;
+                    }
+
                     this.setState({
                       tarjeta: {
                         ...this.state.tarjeta,
@@ -449,19 +490,52 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
 
             <Form.Row>
               <Form.Group as={Col} md="3" controlId="validationCustom05">
-                <Form.Label>Fecha de Vencimiento</Form.Label>
+                <Form.Label>Mes de Vencimiento</Form.Label>
                 <Form.Control
-                  type="text"
-                  placeholder="AA/MM"
+                  type="number"
+                  placeholder="08"
                   id="cc-exp"
+                  min={1}
+                  max={12}
                   required
                   autoComplete="off"
-                  value={this.state.tarjeta.vencimiento}
+                  value={this.state.tarjeta.mesVencimiento}
                   onChange={(e) => {
+                    if (isNaN(Number(e.target.value)) || e.target.value.length > 2) {
+                      return;
+                    }
+
                     this.setState({
                       tarjeta: {
                         ...this.state.tarjeta,
-                        vencimiento: e.target.value,
+                        mesVencimiento: e.target.value,
+                      },
+                    });
+                  }}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Por favor, ingrese la fecha de vencimiento de su tarjeta.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Label>/</Form.Label>
+              <Form.Group as={Col} md="3" controlId="validationCustom05">
+                <Form.Label>Año de Vencimiento</Form.Label>
+                <Form.Control
+                  type="number"
+                  min={1}
+                  placeholder="24"
+                  id="cc-exp"
+                  required
+                  autoComplete="off"
+                  value={this.state.tarjeta.yearVencimiento}
+                  onChange={(e) => {
+                    if (isNaN(Number(e.target.value)) || e.target.value.length > 2) {
+                      return;
+                    }
+                    this.setState({
+                      tarjeta: {
+                        ...this.state.tarjeta,
+                        yearVencimiento: e.target.value,
                       },
                     });
                   }}
@@ -479,6 +553,10 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
                   required
                   value={this.state.tarjeta.csc}
                   onChange={(e) => {
+                    if (isNaN(Number(e.target.value))) {
+                      return;
+                    }
+
                     this.setState({
                       tarjeta: {
                         ...this.state.tarjeta,
@@ -492,7 +570,7 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
-
+            <div className="error-message">{this.state.errorMessage}</div>
             <div className="terms">
               Al pagar, usted esta aceptando nuestros terminos y condiciones.
             </div>

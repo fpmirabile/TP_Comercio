@@ -20,9 +20,9 @@ class LeftBar extends React.PureComponent<PropType> {
     history.push(`${match.url}/products`);
   };
 
-  handleReportClick = () => {
+  handleOrdersClick = () => {
     const { history, match } = this.props;
-    history.push(`${match.url}/charts`);
+    history.push(`${match.url}/orders`);
   };
 
   handleGoToTheSite = () => {
@@ -79,9 +79,9 @@ class LeftBar extends React.PureComponent<PropType> {
                     </Button>
                   </li>
                   <li className="admin-link-section">
-                    <Button onClick={this.handleReportClick} className="btn-admin-link">
+                    <Button onClick={this.handleOrdersClick} className="btn-admin-link">
                       <FontAwesomeIcon icon="table" />
-                      <span className="button-title">Reportes</span>
+                      <span className="button-title">Ordenes</span>
                     </Button>
                   </li>
                   <li className="admin-link-section">
