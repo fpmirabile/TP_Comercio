@@ -1,0 +1,35 @@
+.about-us{
+.container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  background: #efe9e5;
+
+  
+  .title {
+    color: #212121 !important;
+    padding-bottom: 0.5em;
+    padding-top:20px;
+    position: relative;
+    font-size: 2.5em;
+    margin-bottom: 2rem;
+
+    &::after {
+      content: "";
+      background: #fa1818 !important;
+      height: 2px;
+      width: 100%;
+      position: absolute;
+      bottom: 10%;
+      left: 0;
+    }
+}
+  .au-body{
+    padding-bottom: 12rem;
+    background: #efe9e5;
+    text-align: center;
+    border: none;
+  }
+  }
+}

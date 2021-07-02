@@ -12,6 +12,7 @@ import Products from "./pages/products";
 import ModalContainer from "./modal-container";
 import NotFound from "./pages/error-pages/not-found";
 import Checkout from "./pages/final-checkout/index";
+import AboutUs from "./pages/about-us"
 
 
 class Store extends React.PureComponent<RouteComponentProps> {
@@ -24,6 +25,9 @@ class Store extends React.PureComponent<RouteComponentProps> {
         <Switch location={background || location}>
           <Route path={`${match.url}products`}>
             <Products title="Productos" />
+          </Route>
+          <Route path={`${match.url}about-us`}>
+            <AboutUs/>
           </Route>
           <Route path={`${match.url}checkout`} >
             <Checkout />
