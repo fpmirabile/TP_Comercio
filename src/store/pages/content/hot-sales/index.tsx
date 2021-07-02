@@ -1,55 +1,43 @@
 import * as React from "react";
+import productApi, { Product } from "../../../../api/models/product";
 import ProductCard from "../../../common/product-card";
 import "./styles.scss";
 
-interface Product {
-  image: string;
-  name: string;
+interface StateType {
+  products: Product[];
 }
 
-interface PropTypes {
-  products: Product;
-}
+class HotSales extends React.PureComponent {
+  state: StateType = {
+    products: [],
+  };
 
-class HotSales extends React.PureComponent<PropTypes> {
+  async componentDidMount() {
+    const { products } = this.state;
+    if (!products.length) {
+      const products = await productApi.topSell();
+      this.setState({
+        products,
+      });
+    }
+  }
+
   render() {
-    // const { products } = this.props;
+    const { products } = this.state;
     return (
       <div className="hot-sales-container">
         <div className="title">Los más vendidos</div>
         <div className="products">
-          <ProductCard
-            productName="Producto"
-            type={0}
-            title="Pan Celiaco"
-            imageName="41.png"
-            offer={12}
-            price={13}
-          />
-          <ProductCard
-            productName="Producto"
-            type={0}
-            title="Pan Celiaco"
-            imageName="41.png"
-            offer={12}
-            price={13}
-          />
-          <ProductCard
-            productName="Producto"
-            type={0}
-            title="Pan Celiaco"
-            imageName="41.png"
-            offer={12}
-            price={13}
-          />
-          <ProductCard
-            productName="Producto"
-            type={0}
-            title="Pan Celiaco"
-            imageName="41.png"
-            offer={12}
-            price={13}
-          />
+          {products.map((product) => {
+            return (
+              <ProductCard
+                title={product.name}
+                imageName={product.imageUrl}
+                discount={product.discount}
+                price={product.msrp}
+              />
+            );
+          })}
         </div>
       </div>
     );

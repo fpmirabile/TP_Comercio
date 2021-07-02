@@ -4,9 +4,13 @@ import RightBar from "./right-bar";
 import SearchForm from "./search-form";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import "./styles.scss";
-import { getItem } from "../../../helpers/local-storage";
 
-class Nav extends React.PureComponent<RouteComponentProps> {
+interface PropType extends RouteComponentProps {
+  isLogged: boolean;
+  isAdmin: boolean;
+}
+
+class Nav extends React.PureComponent<PropType> {
   handleNavbarClick = () => {
     const { history } = this.props;
     history.push("/");
@@ -23,8 +27,7 @@ class Nav extends React.PureComponent<RouteComponentProps> {
   }
 
   render() {
-    const { location } = this.props;
-    const isAdmin = getItem("isAdmin") === "true";
+    const { location, isLogged, isAdmin } = this.props;
     return (
       <div className="nav">
         <Navbar fixed="top" bg="light" expand="lg">
@@ -33,7 +36,7 @@ class Nav extends React.PureComponent<RouteComponentProps> {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggler" />
           <SearchForm isAdmin={isAdmin} onAdminClick={this.handleAdminClick} onCartClick={this.handleOnCartClick} />
-          <RightBar location={location} />
+          <RightBar isLogged={isLogged} location={location} />
         </Navbar>
       </div>
     );

@@ -5,14 +5,20 @@ import { faPhone, faEnvelope } from "@fortawesome/fontawesome-free-solid";
 import Nav from "./navbar";
 import Menu from "./menu";
 import Promos from "./promos";
-import "./style.scss";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import "./style.scss";
 
-class StoreHeader extends React.PureComponent<RouteComponentProps> {
+interface PropTypes extends RouteComponentProps {
+  isLogged: boolean;
+  isAdmin: boolean;
+}
+
+class StoreHeader extends React.PureComponent<PropTypes> {
   render() {
+    const { isLogged, isAdmin } = this.props;
     return (
       <div>
-        <Nav />
+        <Nav isAdmin={isAdmin} isLogged={isLogged} />
         <header className="header">
           <div className="ordering">
             <div className="logo">

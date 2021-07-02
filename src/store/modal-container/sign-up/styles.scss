@@ -1,0 +1,14 @@
+.register-body {
+  .registration-validation-block {
+    margin-bottom: 1.8rem;
+    .register-validation {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      color: red;
+      margin: 0 5px;
+      text-align: center;
+    }
+  }
+}

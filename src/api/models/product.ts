@@ -4,19 +4,18 @@ import { DeleteResponse } from "../common"
 export interface Product {
   id: string;
   name: string;
-  price: number;
-  discount: number;
+  msrp: number;
+  discount?: number;
   stock: number;
-  image?: string;
+  imageUrl?: string;
 }
 
-
 const getProductById = (productId: string): Promise<Product> => {
-  return authenticatedGet(`products/${productId}`)
+  return authenticatedGet(`/products/product/${productId}`)
 }
 
 const deleteProductById = (productId: string): Promise<DeleteResponse> => {
-  return authenticatedDelete(`products/${productId}`)
+  return authenticatedDelete(`/products/${productId}`)
 }
 
 const updateProduct = (prod: Product): Promise<Product> => {
@@ -36,13 +35,13 @@ const createProduct = async (name: string, stock: number, price: number, discoun
   return authenticatedPost("/products", newProduct)
 }
 
-const searchProduct = (page: number, pageSize: number, categoryId?: string, search?: string): Promise<Product> => {
+const searchProduct = (page: number, pageSize: number, categoryId?: string, search?: string): Promise<Product[]> => {
   const queryCat = categoryId ? '&categoryId=' + categoryId : '';
   const querySearch = search ? '&search=' + search : '';
   return authenticatedGet(`/products?page=${page}&pageSize=${pageSize}${queryCat}${querySearch}`)
 }
 
-const topSellProducts = (): Promise<Product> => {
+const topSellProducts = (): Promise<Product[]> => {
   return authenticatedGet('/products/top');
 }
 

@@ -4,13 +4,35 @@ import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "./style.scss";
 
-type PropsType = {
+interface PropsTypes {
   location: RouteComponentProps["location"];
+  isLogged: boolean;
 };
 
-class RightBar extends React.PureComponent<PropsType> {
+class RightBar extends React.PureComponent<PropsTypes> {
+  renderOrderNav = () => {
+    return (
+      <div className="ml-auto nav-right-bar">
+        <Nav>
+          <NavLink
+            className="nav-link"
+            to={{
+              pathname: "/orders",
+            }}
+          >
+            Mis ordenes
+          </NavLink>
+        </Nav>
+      </div>
+    );
+  }
+
   render() {
-    const { location } = this.props;
+    const { location, isLogged } = this.props;
+    if (isLogged) {
+      return this.renderOrderNav();
+    }
+
     return (
       <div className="ml-auto nav-right-bar">
         <Nav>

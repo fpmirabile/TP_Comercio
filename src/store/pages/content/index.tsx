@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import HotSales from "./hot-sales";
+import TopSales from "./hot-sales";
 import "./style.scss";
 
 class PageContent extends React.PureComponent {
@@ -10,7 +10,7 @@ class PageContent extends React.PureComponent {
         <Helmet>
           <title>Almacen celiaco - los mejores productos! - Inicio</title>
         </Helmet>
-        <HotSales products={{ name: "asd", image: "asd"}} />
+        <TopSales />
       </div>
     );
   }

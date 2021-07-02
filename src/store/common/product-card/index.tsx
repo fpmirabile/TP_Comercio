@@ -1,41 +1,37 @@
 import * as React from "react";
-import { Card, Button} from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import "./style.scss";
 
 interface PropTypes {
-  productName: string;
-  imageName: string;
+  imageName?: string;
   title: string;
-  type: number;
-  offer: number;
+  discount?: number;
   price: number;
 }
 
-
-
 class ProductCard extends React.PureComponent<PropTypes> {
-
   render() {
-    const { imageName, productName, title, offer, price } = this.props;
+    const { imageName, title, discount, price } = this.props;
     return (
       <div className="product-category">
         <Card>
           <Card.Img
             variant="top"
-            src={require(`../../../assets/images/product/${imageName}`).default}
-            alt={productName}
+            src={imageName || require(`../../../assets/images/products/template.jpeg`).default}
+            alt={title}
+            className="product-image"
           />
           <Card.Body>
             <Card.Title>
               <Card.Title>{title}</Card.Title>
             </Card.Title>
             <Card.Text>
-              <span className="actual-price">${offer}</span>
-              <span className="price-without-discount">${price}</span>
+              <span className="actual-price">${price}</span>
+              {discount && (<span className="price-without-discount">${discount}</span>)}
             </Card.Text>
-            <a href="#" className="btn-agregar">
+            <Button className="btn-agregar">
               Agregar
-            </a>
+            </Button>
           </Card.Body>
         </Card>
       </div>

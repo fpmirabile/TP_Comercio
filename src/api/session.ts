@@ -45,7 +45,7 @@ const getTokenStorage = () => {
   return STORAGE.session;
 }
 
-export const setSession = ({jwt, refresh}: AuthSession): boolean => {
+export const setSession = ({ jwt, refresh }: AuthSession): boolean => {
   const current = getSession();
   if (current && current.jwt === jwt && current.refresh === refresh) {
     return false;

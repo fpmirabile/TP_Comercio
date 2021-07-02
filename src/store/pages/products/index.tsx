@@ -20,11 +20,9 @@ class Products extends React.PureComponent<PropTypes> {
     return (
       <Col key={catId} lg={3} sm={6} md={3}>
         <ProductCard
-          productName={product}
-          type={type}
           title={title}
           imageName={image}
-          offer={offer}
+          discount={offer}
           price={price}
         />
       </Col>

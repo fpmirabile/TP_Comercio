@@ -23,11 +23,16 @@ const updateUser = (userId: string, email: string, isAdmin?: boolean, password?:
   return authenticatedPut('/users', { id: userId, email, isAdmin, password });
 }
 
+const me = (): Promise<User> => {
+  return authenticatedGet("/users/me");
+}
+
 const userApi = {
   getAll: getAllUsers,
   getById: findUserById,
   deleteById: deleteUserById,
   update: updateUser,
+  me: me,
 }
 
 export default userApi;

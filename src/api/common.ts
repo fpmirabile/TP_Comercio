@@ -39,13 +39,13 @@ const withAuthenticationToken = (headers: HeadersInit, token?: string) => {
 
   return {
     ...headers,
-    Authorization: `Bearer ${jwt}`,
+    Authorization: `${jwt}`,
   }
 }
 
 export const authenticatedApi = (url: string, args: RequestInit = {}, options: AuthenticatedApiOptions = {}) => {
   const {
-    checkTokenExpiration, 
+    checkTokenExpiration,
     token
   } = options || {};
   args.headers = withAuthenticationToken(args.headers || {}, token);
@@ -57,14 +57,20 @@ export const authenticatedApi = (url: string, args: RequestInit = {}, options: A
 
 export const api = (url: string, args: RequestInit = {}, checkTokenExpirationFn: ResponseHandler = checkTokenExpiration) => {
   let absoluteUrl = url;
-  if (url.startsWith("/")) {
-    absoluteUrl = `${getEndpoints().api}/${url}`;
+  if (!url.startsWith("/")) {
+    absoluteUrl = `/${url}`;
   }
 
-  return fetch(absoluteUrl, args)
+  const finalUrl = `${getEndpoints().api}${absoluteUrl}`
+  return fetch(finalUrl, args)
+    .catch(r => { throw r })
     .then(checkStatus)
     .then(checkTokenExpirationFn)
-    .then(formatResponse);
+    .then(formatResponse)
+    .catch(error => {
+      console.log('Hubo un problema con la petición Fetch:' + error.message);
+      throw error;
+    });
 }
 
 export const refreshToken = () => {

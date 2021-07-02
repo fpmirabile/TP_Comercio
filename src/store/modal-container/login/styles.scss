@@ -29,6 +29,15 @@
       display: flex;
     }
 
+    .login-validation {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      margin-bottom: 1.8rem;
+      color: red;
+    }
+
     .btn {
       width: 120px;
       height: 40px;
