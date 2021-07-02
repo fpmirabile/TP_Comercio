@@ -1,6 +1,7 @@
-.product-page {
+.product-create-page {
   padding: 2rem 0;
-
+  height: 93vh;
+  
   .title-container {
     .title {
       margin: 9px 0;
@@ -11,7 +12,6 @@
     }
   }
   .create-product {
-    
     .create-prod-title {
       margin: 5px 0 6px;
       display: flex;
@@ -26,14 +26,23 @@
       align-items: center;
       text-align: center;
       margin-bottom: 2rem;
-    
     }
   }
-.btn-crear{
+
+  .category-selector {
+    text-transform: capitalize;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 18px;
+  }
+
+  .btn-crear {
     margin-top: 2rem;
     margin-bottom: 2rem;
-}
-  .product-category {
+  }
+  .product-preview {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,13 +57,6 @@
       margin-bottom: 30px;
       transition: ease all 0.5s;
       border-radius: 20px;
-
-      &:hover {
-        cursor: pointer;
-        transform: scale(1.1);
-        background-color: #f1f8e0;
-        transition: background-color 1000ms linear;
-      }
 
       .card-img {
         padding: 5 5 5 5;

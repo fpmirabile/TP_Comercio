@@ -38,10 +38,10 @@ class Products extends React.PureComponent<PropTypes, StateType> {
       search,
       onlyDiscount
     );
-
+ 
     if (pagedProducts?.length) {
       const nextPage = await productApi.search(
-        resetPage || page + 1,
+        (resetPage || page) + 1,
         pageSize,
         categoryId,
         categoryName,

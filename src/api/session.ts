@@ -5,6 +5,7 @@ interface AuthSession { jwt?: string, refresh?: string };
 interface TokenStorage {
   getItem: (key: StorageKey) => string | null;
   setItem: (key: StorageKey, value: string) => void;
+  removeItem: (key: StorageKey) => void;
 }
 
 interface TokenStorageMap {
@@ -26,7 +27,8 @@ const tryOrNull = <T>(f: () => T) => {
 const STORAGE: TokenStorageMap = {
   session: {
     getItem: k => tryOrNull(() => sessionStorage.getItem(k)),
-    setItem: (k, v) => tryOrNull(() => sessionStorage.setItem(k, v))
+    setItem: (k, v) => tryOrNull(() => sessionStorage.setItem(k, v)),
+    removeItem: k => tryOrNull(() => sessionStorage.removeItem(k)),
   }
 }
 
@@ -60,4 +62,16 @@ export const setSession = ({ jwt, refresh }: AuthSession): boolean => {
   setItem('store.jwt', jwt || '');
   setItem('store.refresh', refresh || '');
   return true;
+}
+
+export const removeSession = () => {
+  const storage = getTokenStorage();
+  if (!storage) {
+    return;
+  }
+
+  const { removeItem } = storage;
+
+  removeItem('store.jwt');
+  removeItem('store.refresh');
 }

@@ -5,50 +5,32 @@ import {
   withRouter,
   RouteComponentProps,
 } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import queryString from "query-string";
 import Header from "./header";
 import Footer from "./footer";
+import Logout from './pages/logout';
 import PageContent from "./pages/content";
 import Products from "./pages/products";
 import ModalContainer from "./modal-container";
 import NotFound from "./pages/error-pages/not-found";
 import Checkout from "./pages/final-checkout/index";
 import { LoginTokens } from "../api/models/auth";
-import { getSession, setSession } from "../api/session";
-import userApi from "../api/models/user";
+import { setSession } from "../api/session";
 import AboutUs from "./pages/about-us";
+import { LoggedUser } from "../App";
 
-export type LoggedUser = {
-  email: string;
-  id: string;
-  isAdmin: boolean;
-};
-
-interface StateType {
+interface PropTypes extends RouteComponentProps {
   loggedUser?: LoggedUser;
 }
 
-class Store extends React.PureComponent<RouteComponentProps, StateType> {
-  state: StateType = {
-    loggedUser: undefined,
-  };
-
-  async componentDidMount() {
-    const tokens = getSession();
-    if (tokens) {
-      const me = await userApi.me();
-      this.setState({
-        loggedUser: me,
-      });
-    }
-  }
+class Store extends React.PureComponent<PropTypes> {
 
   handleUserLogin = ({ tokens, user }: LoginTokens) => {
     setSession({ jwt: tokens.token, refresh: tokens.refreshToken });
     this.setState({
       loggedUser: user,
     });
+    window.me = user;
   };
 
   handleCheckoutEnd = () => {
@@ -61,9 +43,15 @@ class Store extends React.PureComponent<RouteComponentProps, StateType> {
     history.push("/");
   };
 
+  handleLogout = () => {
+    this.setState({
+      loggedUser: undefined,
+    });
+    this.handleRedirectToHomePage();
+  }
+
   render() {
-    const { location, match } = this.props;
-    const { loggedUser } = this.state;
+    const { location, match, loggedUser } = this.props;
     const isAdmin = loggedUser?.isAdmin || false;
     const background = location.state && location.state.background;
     const categoryName =
@@ -73,7 +61,6 @@ class Store extends React.PureComponent<RouteComponentProps, StateType> {
     return (
       <div>
         <Header isAdmin={isAdmin} isLogged={!!loggedUser} />
-        <ToastContainer />
         <Switch location={background || location}>
           <Route path={[`${match.url}products`, `${match.url}deals`]}>
             <Products
@@ -91,6 +78,9 @@ class Store extends React.PureComponent<RouteComponentProps, StateType> {
               onRedirectToHome={this.handleRedirectToHomePage}
               onCheckoutEnd={this.handleCheckoutEnd}
             />
+          </Route>
+          <Route path={`${match.url}logout`}>
+            <Logout onLogout={this.handleLogout} />
           </Route>
           <Route path={`${match.url}/`}>
             <PageContent loggedUser={loggedUser} />

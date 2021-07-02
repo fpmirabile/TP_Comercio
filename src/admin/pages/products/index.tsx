@@ -1,17 +1,78 @@
 import * as React from "react";
 import { Button, Container } from "react-bootstrap";
 import { Helmet } from "react-helmet";
+import productApi, { Product } from "../../../api/models/product";
+import { toast } from "react-toastify";
 import "./styles.scss";
 
 interface PropType {
   onNewProductClick: () => void;
 }
 
+interface StateType {
+  products: Product[];
+  page: number;
+  pageSize: number;
+}
+
 class AdminProducts extends React.PureComponent<PropType> {
+  state: StateType = {
+    page: 1,
+    pageSize: 10,
+    products: [],
+  };
+
+  handleLoadProducts = async (newPage?: number, newPageSize?: number) => {
+    const { page, pageSize } = this.state;
+    const products = await productApi.search(
+      newPage || page,
+      newPageSize || pageSize
+    );
+    if (products) {
+      this.setState({
+        products,
+        page: newPage || page,
+        pageSize: newPageSize || pageSize,
+      });
+    }
+  };
+
+  componentDidMount() {
+    this.handleLoadProducts();
+  }
+
+  handleDeleteProduct = (product: Product) => async () => {
+    const deleteOp = await productApi.delete(product.id);
+    if (deleteOp.operation) {
+      toast.success("Producto eliminado!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: { top: 50 },
+      });
+    } else {
+      toast.error("No se pudo eliminar el producto", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: { top: 50 },
+      });
+    }
+  };
+
   render() {
+    const { products } = this.state;
     const { onNewProductClick } = this.props;
     return (
-      <div className="product-page">
+      <div className="product-admin-page">
         <Helmet>
           <title>Maneja tus productos - Admin page</title>
         </Helmet>
@@ -23,7 +84,9 @@ class AdminProducts extends React.PureComponent<PropType> {
             <div className="table-title ">
               <h2>Listado de productos</h2>
               <div>
-                <Button onClick={onNewProductClick} variant="success">Nuevo</Button>
+                <Button onClick={onNewProductClick} variant="success">
+                  Nuevo
+                </Button>
               </div>
             </div>
             <div className="table-content">
@@ -33,24 +96,41 @@ class AdminProducts extends React.PureComponent<PropType> {
                     <th>SKU</th>
                     <th>Nombre</th>
                     <th>Precio</th>
-                    <th>Acciones</th>
+                    <th className="product-column-right">Precio descuento</th>
+                    <th style={{ textAlign: "right" }}>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {Array.from(Array(10).keys()).map((colums) => (
-                    <tr className="body-column">
-                      <td>f3ce1426-a7cc-470a-bbfa-3f9828075eaa</td>
-                      <td>Cereal</td>
-                      <td>$10</td>
-                      <td>
-                        <Button variant="primary">Ver</Button>
-                        <Button variant="info">Editar</Button>
-                        <Button variant="danger">Eliminar</Button>
-                      </td>
-                    </tr>
-                  ))}
+                  {products.map((product) => {
+                    return (
+                      <tr key={product.id} className="body-column">
+                        <td>{product.id}</td>
+                        <td>{product.name}</td>
+                        <td>${product.msrp}</td>
+                        <td className="product-column-right">
+                          {product.discount
+                            ? `$${product.discount}`
+                            : "No tiene"}
+                        </td>
+                        <td className="product-action-buttons">
+                          <Button variant="info">Editar</Button>
+                          <Button
+                            onClick={this.handleDeleteProduct(product)}
+                            variant="danger"
+                          >
+                            Eliminar
+                          </Button>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
+              {!products.length && (
+                <div className="no-products-loaded">
+                  <span>No hay productos cargados</span>
+                </div>
+              )}
             </div>
           </div>
         </Container>

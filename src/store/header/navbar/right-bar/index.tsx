@@ -7,7 +7,7 @@ import "./style.scss";
 interface PropsTypes {
   location: RouteComponentProps["location"];
   isLogged: boolean;
-};
+}
 
 class RightBar extends React.PureComponent<PropsTypes> {
   renderOrderNav = () => {
@@ -22,10 +22,13 @@ class RightBar extends React.PureComponent<PropsTypes> {
           >
             Mis ordenes
           </NavLink>
+          <NavLink className="nav-link" to={{ pathname: "/logout" }}>
+            Cerrar Sesion
+          </NavLink>
         </Nav>
       </div>
     );
-  }
+  };
 
   render() {
     const { location, isLogged } = this.props;

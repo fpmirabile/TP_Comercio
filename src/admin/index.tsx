@@ -8,17 +8,26 @@ import NewProduct from "./pages/new-product";
 import Reports from "./pages/reports";
 import classNames from "classnames";
 import "./styles.scss";
+import { LoggedUser } from "../App";
 
 interface StateType {
   expandSideBar: boolean;
 }
 
-class AdminPage extends React.PureComponent<RouteComponentProps, StateType> {
-  constructor(props: RouteComponentProps) {
-    super(props);
-    this.state = {
-      expandSideBar: true,
-    };
+interface PropTypes extends RouteComponentProps {
+  loggedAdmin?: LoggedUser;
+}
+
+class AdminPage extends React.PureComponent<PropTypes, StateType> {
+  state: StateType = {
+    expandSideBar: true,
+  };
+
+  componentDidMount() {
+    const { loggedAdmin, history } = this.props;
+    if (!loggedAdmin || !loggedAdmin.isAdmin) {
+      history.push("");
+    }
   }
 
   handleHamburgerClick = () => {

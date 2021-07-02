@@ -2,20 +2,51 @@ import * as React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Store from "./store";
 import Admin from "./admin";
+import { ToastContainer } from 'react-toastify';
 import "./App.scss";
+import { getSession } from "./api/session";
+import userApi from "./api/models/user";
 
+export type LoggedUser = {
+  email: string;
+  id: string;
+  isAdmin: boolean;
+};
 
-export default class App extends React.PureComponent {
+declare global {
+  interface Window { me: LoggedUser; }
+}
+
+interface StateType {
+  loggedUser?: LoggedUser;
+}
+
+export default class App extends React.PureComponent<{}, StateType> {
+  state: StateType = {
+    loggedUser: undefined,
+  };
+
+  async componentDidMount() {
+    const tokens = getSession();
+    if (tokens) {
+      const me = await userApi.me();
+      this.setState({
+        loggedUser: me,
+      });
+    }
+  }
+
   render() {
     return (
       // Browser router porque queremos las url identicas sin #
       <BrowserRouter>
+        <ToastContainer />
         <Switch>
           <Route path="/admin">
-            <Admin />
+            <Admin loggedAdmin={this.state.loggedUser} />
           </Route>
           <Route path="/">
-            <Store />
+            <Store loggedUser={this.state.loggedUser} />
           </Route>
         </Switch>
       </BrowserRouter>

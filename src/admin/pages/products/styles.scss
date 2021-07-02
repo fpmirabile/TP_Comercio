@@ -1,5 +1,6 @@
-.product-page {
+.product-admin-page {
   padding: 10px 0;
+  height: 100vh;
   .title-container {
     .title {
       margin: 9px 0;
@@ -31,6 +32,14 @@
       clear: both;
       margin-top: 5px;
 
+      .no-products-loaded {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 20px;
+      }
+
       .table {
         width: 100%;
         color: #212529;
@@ -44,6 +53,10 @@
           }
         }
 
+        .product-column-right {
+          text-align: right;
+        }
+
         .body-column {
           td {
             padding: 0.75rem;
@@ -53,6 +66,12 @@
 
           .btn:not(:last-child) {
             margin-right: 1rem;
+          }
+
+          .product-action-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
           }
         }
       }
