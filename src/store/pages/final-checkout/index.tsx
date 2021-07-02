@@ -1,16 +1,14 @@
 /* eslint-disable no-lone-blocks */
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import "./styles.scss";
 import {
   Col,
   Form,
   Button,
   Container,
-  InputGroup,
 } from "react-bootstrap";
 
-  class Checkout extends React.Component<{},any> {
+  class Checkout extends React.PureComponent<{},any> {
     // eslint-disable-next-line @typescript-eslint/no-useless-constructor
     constructor(props:any) {
       super(props);

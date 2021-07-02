@@ -1,75 +1,63 @@
-/*.checkout {
-  font-size: small;
+.confirm {
+  .modal-header {
+    border-bottom: none !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-flow: column wrap;
+    padding-top: 0 !important;
+    padding-bottom: 0.5rem !important;
 
-  .form-control{
+    .close {
+      order: 0;
+      justify-self: flex-end;
+      align-self: flex-end;
+      padding: 0 !important;
+      margin: 0 !important;
+      padding-top: 1rem !important;
+    }
+
+    .modal-title {
+      color: #212121 !important;
+      padding-bottom: 0.5em;
+      padding-top: 20px;
+      position: relative;
+      font-size: 1.5em;
+      margin-bottom: 2rem;
+      text-align: center;
+      order: 2;
+
+      &::after {
+        content: "";
+        background: #fa1818 !important;
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        bottom: 10%;
+        left: 0;
+      }
+    }
+  }
+
+  .modal-body {
+    padding-top: 0;
     font-size: small;
-  }
-
-  }*/
-
-  .checkout {
-    .modal-header {
-      border-bottom: none !important;
-      justify-content: center !important;
-      align-items: center !important;
-      flex-flow: column wrap;
-      padding-top: 0 !important;
-      padding-bottom: 0.5rem !important;
-  
-      .close {
-        order: 0;
-        justify-self: flex-end;
-        align-self: flex-end;
-        padding: 0 !important;
-        margin: 0 !important;
-        padding-top: 1rem !important;
-      }
-  
-      .modal-title {
-        color: #212121 !important;
-        padding-bottom: 0.5em;
-        padding-top:20px;
-        position: relative;
-        font-size: 1.5em;
-        margin-bottom: 2rem;
-        text-align: center;
-        order: 2;
-  
-        &::after {
-          content: "";
-          background: #fa1818 !important;
-          height: 2px;
-          width: 100%;
-          position: absolute;
-          bottom: 10%;
-          left: 0;
-        }
-      }
+    .cancel-button-container {
+      align-items: flex-end;
+      justify-content: flex-end;
+      display: flex;
     }
-  
-    .modal-body {
-      padding-top: 0;
+
+    .form-control {
       font-size: small;
-      .cancel-button-container {
-        align-items: flex-end;
-        justify-content: flex-end;
-        display: flex;
-      }
-      
-      .form-control{
-        font-size: small;
-      }
-
-    
-    }
-
-    .btn {
-      font-size: small !important;
-    }
-    .total-factura{
-      font-size: large;
-      text-align: right;
-      width: 300px;
     }
   }
-  
+
+  .btn {
+    font-size: small !important;
+  }
+  .total-factura {
+    font-size: large;
+    text-align: right;
+    width: 300px;
+  }
+}

@@ -1,28 +1,91 @@
 import * as React from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
+import productApi, { Product } from "../../../api/models/product";
 import ProductCard from "../../common/product-card";
 import "./styles.scss";
 
-interface PropTypes {
-  title: string;
+interface StateType {
+  products: Product[];
+  page: number;
+  pageSize: number;
+  hideShowMoreButton: boolean;
 }
 
-class Products extends React.PureComponent<PropTypes> {
+interface PropTypes {
+  onlyDiscount?: boolean;
+  categoryId?: string;
+  categoryName?: string;
+  search?: string;
+}
+
+class Products extends React.PureComponent<PropTypes, StateType> {
+  state: StateType = {
+    pageSize: 20,
+    page: 1,
+    products: [],
+    hideShowMoreButton: false,
+  };
+
+  handleLoadProducts = async (resetPage?: number) => {
+    const { onlyDiscount, categoryId, search, categoryName } = this.props;
+    const { page, pageSize } = this.state;
+    const pagedProducts = await productApi.search(
+      resetPage || page,
+      pageSize,
+      categoryId,
+      categoryName,
+      search,
+      onlyDiscount
+    );
+
+    if (pagedProducts?.length) {
+      this.setState((prevState) => {
+        return {
+          products: prevState.products.concat(pagedProducts),
+          page: resetPage || page
+        };
+      });
+    } else {
+      this.setState({
+        hideShowMoreButton: true,
+      });
+    }
+  };
+
+  componentDidMount() {
+    const { products } = this.state;
+    if (!products.length) {
+      this.handleLoadProducts();
+    }
+  }
+
+  // Necesitamos reworkear esto
+  UNSAFE_componentWillReceiveProps(next: PropTypes) {
+    if (this.props.search !== next.search) {
+      this.handleLoadProducts(0);
+    }
+  }
+
+  handleLoadMore = () => {
+    const { page } = this.state;
+    this.handleLoadProducts(page + 1);
+  };
+
   renderProduct = (
-    catId: number,
-    type: number,
-    title: string,
-    product: string,
-    image: string,
-    offer: number,
-    price: number
+    prodId: string,
+    catId: string,
+    productName: string,
+    price: number,
+    image?: string,
+    discount?: number
   ) => {
     return (
-      <Col key={catId} lg={3} sm={6} md={3}>
+      <Col key={catId} md={3} sm={6} xs={12}>
         <ProductCard
-          title={title}
+          id={prodId}
+          title={productName}
           imageName={image}
-          discount={offer}
+          discount={discount}
           price={price}
         />
       </Col>
@@ -30,25 +93,35 @@ class Products extends React.PureComponent<PropTypes> {
   };
 
   render() {
-    const { title } = this.props;
+    const { categoryName } = this.props;
+    const { products, hideShowMoreButton } = this.state;
     return (
-      <div className="products">
+      <div className="products-page">
         <Container>
-          <div className="title">{title}</div>
-
+          <div className="title">
+            Productos
+            {categoryName ? ` de ${categoryName}` : ''}
+          </div>
           <Row>
-            {temporal.map((product) =>
+            {products.map((product) =>
               this.renderProduct(
-                product.catId,
-                product.type,
-                product.title,
-                product.productName,
-                product.imageName,
-                product.offer,
-                product.price
+                product.id,
+                product.category.id,
+                product.name,
+                product.msrp,
+                product.imageUrl,
+                product.discount
               )
             )}
           </Row>
+          {!hideShowMoreButton && (
+            <Button
+              className="show-more-products"
+              onClick={this.handleLoadMore}
+            >
+              Mostrar más
+            </Button>
+          )}
         </Container>
       </div>
     );
@@ -56,93 +129,3 @@ class Products extends React.PureComponent<PropTypes> {
 }
 
 export default Products;
-
-const temporal: Array<{
-  catId: number;
-  imageName: string;
-  type: number;
-  title: string;
-  productName: string;
-  offer: number;
-  price: number;
-}> = [
-  {
-    catId: 32,
-    imageName: "29.png",
-    productName: "Banana",
-    title: "Banana X Kg",
-    type: 1,
-
-    offer: 10.49,
-    price: 12.0,
-  },
-  {
-    catId: 2,
-    imageName: "36.png",
-    productName: "Frutillas",
-    title: "Frutillas X Kg",
-    type: 1,
-
-    offer: 10.0,
-    price: 12.0,
-  },
-  {
-    catId: 3,
-    imageName: "3.png",
-    productName: "Manzana",
-    title: "Manzana X Kg",
-    type: 1,
-    offer: 10.0,
-    price: 12.0,
-  },
-  {
-    catId: 4,
-    imageName: "4.png",
-    productName: "Product",
-    title: "Product X Kg",
-    type: 1,
-
-    offer: 10.0,
-    price: 12.0,
-  },
-  {
-    catId: 5,
-    imageName: "5.png",
-    productName: "Product",
-    title: "Product X Kg",
-    type: 1,
-
-    offer: 10.0,
-    price: 12.0,
-  },
-  {
-    catId: 6,
-    imageName: "6.png",
-    productName: "Product",
-    title: "Product X Kg",
-    type: 1,
-
-    offer: 10.0,
-    price: 12.0,
-  },
-  {
-    catId: 7,
-    imageName: "7.png",
-    productName: "Product",
-    title: "Product X Kg",
-    type: 1,
-
-    offer: 10.0,
-    price: 12.0,
-  },
-  {
-    catId: 8,
-    imageName: "8.png",
-    productName: "Product",
-    title: "Product X Kg",
-    type: 1,
-
-    offer: 10.0,
-    price: 12.0,
-  },
-];

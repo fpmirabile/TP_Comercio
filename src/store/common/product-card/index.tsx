@@ -1,8 +1,12 @@
 import * as React from "react";
 import { Card, Button } from "react-bootstrap";
+import { toast } from "react-toastify";
+import cartApi from "../../../api/models/cart";
 import "./style.scss";
+import "react-toastify/dist/ReactToastify.css";
 
 interface PropTypes {
+  id?: string;
   imageName?: string;
   title: string;
   discount?: number;
@@ -10,6 +14,27 @@ interface PropTypes {
 }
 
 class ProductCard extends React.PureComponent<PropTypes> {
+  handleAddToCart = async () => {
+    const { id } = this.props;
+    if (!id) {
+      return;
+    }
+
+    const cartUpdated = await cartApi.update(id, 1);
+    if (cartUpdated) {
+      toast.info("Producto agregado al carrito!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: { top: 50 }
+      });
+    }
+  };
+
   render() {
     const { imageName, title, discount, price } = this.props;
     return (
@@ -17,7 +42,10 @@ class ProductCard extends React.PureComponent<PropTypes> {
         <Card>
           <Card.Img
             variant="top"
-            src={imageName || require(`../../../assets/images/products/template.jpeg`).default}
+            src={
+              imageName ||
+              require(`../../../assets/images/products/template.jpeg`).default
+            }
             alt={title}
             className="product-image"
           />
@@ -26,10 +54,14 @@ class ProductCard extends React.PureComponent<PropTypes> {
               <Card.Title>{title}</Card.Title>
             </Card.Title>
             <Card.Text>
-              <span className="actual-price">${price}</span>
-              {discount && (<span className="price-without-discount">${discount}</span>)}
+              <span className="actual-price">
+                ${discount ? discount : price}
+              </span>
+              {discount && (
+                <span className="price-without-discount">${price}</span>
+              )}
             </Card.Text>
-            <Button className="btn-agregar">
+            <Button onClick={this.handleAddToCart} className="btn-agregar">
               Agregar
             </Button>
           </Card.Body>

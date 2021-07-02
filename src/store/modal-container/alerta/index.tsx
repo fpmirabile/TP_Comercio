@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import { Button, Alert } from "react-bootstrap";
 import "./styles.scss";

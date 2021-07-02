@@ -6,28 +6,28 @@ const menu: React.FunctionComponent = () => {
   return (
     <ul className="menu">
       <li className="menu-item">
-        <NavLink to="/product?q=harinas">Harinas</NavLink>
+        <NavLink to="/products?category=harinas">Harinas</NavLink>
       </li>
       <li className="menu-item">
-        <NavLink to="/product?q=galletitas">Galletitas</NavLink>
+        <NavLink to="/products?category=galletitas">Galletitas</NavLink>
       </li>
       <li className="menu-item">
-        <NavLink to="/product?q=pan">Pan</NavLink>
+        <NavLink to="/products?category=pan">Pan</NavLink>
       </li>
       <li className="menu-item">
-        <NavLink to="/product?q=pastas">Pastas</NavLink>
+        <NavLink to="/products?category=pastas">Pastas</NavLink>
       </li>
       <li className="menu-item">
-        <NavLink to="/product?q=cervezas">Cervezas</NavLink>
+        <NavLink to="/products?category=cervezas">Cervezas</NavLink>
       </li>
       <li className="menu-item">
-        <NavLink to="/product?q=pizzas">Pizzas</NavLink>
+        <NavLink to="/products?category=pizzas">Pizzas</NavLink>
       </li>
       <li className="menu-item">
-        <NavLink to="/product?q=budines">Budines</NavLink>
+        <NavLink to="/products?category=budines">Budines</NavLink>
       </li>
       <li className="menu-item">
-        <NavLink to="/product?q=otros">Otros</NavLink>
+        <NavLink to="/products?category=otros">Otros</NavLink>
       </li>
     </ul>
   );

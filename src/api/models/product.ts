@@ -1,5 +1,6 @@
 import { authenticatedDelete, authenticatedGet, authenticatedPost, authenticatedPut } from "../calls"
 import { DeleteResponse } from "../common"
+import { Category } from "./category"
 
 export interface Product {
   id: string;
@@ -8,6 +9,7 @@ export interface Product {
   discount?: number;
   stock: number;
   imageUrl?: string;
+  category: Category;
 }
 
 const getProductById = (productId: string): Promise<Product> => {
@@ -35,10 +37,12 @@ const createProduct = async (name: string, stock: number, price: number, discoun
   return authenticatedPost("/products", newProduct)
 }
 
-const searchProduct = (page: number, pageSize: number, categoryId?: string, search?: string): Promise<Product[]> => {
+const searchProduct = (page: number, pageSize: number, categoryId?: string, categoryName?: string, search?: string, onlyDiscount?: boolean): Promise<Product[]> => {
   const queryCat = categoryId ? '&categoryId=' + categoryId : '';
   const querySearch = search ? '&search=' + search : '';
-  return authenticatedGet(`/products?page=${page}&pageSize=${pageSize}${queryCat}${querySearch}`)
+  const discount = onlyDiscount ? '&onlyDiscount=' + onlyDiscount : ''
+  const catName = categoryName ? '&categoryName=' + categoryName : ''
+  return authenticatedGet(`/products?page=${page}&pageSize=${pageSize}${queryCat}${querySearch}${discount}${catName}`)
 }
 
 const topSellProducts = (): Promise<Product[]> => {

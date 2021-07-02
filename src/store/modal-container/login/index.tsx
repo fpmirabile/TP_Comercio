@@ -6,7 +6,7 @@ import "./styles.scss";
 interface PropsType {
   onClose: () => void;
   onLogin: (login: LoginTokens) => void;
-};
+}
 
 interface StateType {
   username: string;
@@ -17,10 +17,10 @@ interface StateType {
 
 class LoginModal extends React.PureComponent<PropsType, StateType> {
   state: StateType = {
-    username: '',
-    password: '',
+    username: "",
+    password: "",
     showValidationError: true,
-    errorMessage: '',
+    errorMessage: "",
   };
 
   isValidForm = (): boolean => {
@@ -28,7 +28,7 @@ class LoginModal extends React.PureComponent<PropsType, StateType> {
     if (!username || !password) {
       this.setState({
         showValidationError: true,
-        errorMessage: 'El usuario o password ingresado es incorrecto.',
+        errorMessage: "El usuario o password ingresado es incorrecto.",
       });
 
       return false;
@@ -38,37 +38,38 @@ class LoginModal extends React.PureComponent<PropsType, StateType> {
       showValidationError: false,
     });
     return true;
-  }
+  };
 
   handleSubmitForm = async (e: React.FormEvent) => {
     e.preventDefault();
     if (this.isValidForm()) {
       const { username, password } = this.state;
-      const { onLogin } = this.props;
+      const { onLogin, onClose } = this.props;
       const loginResponse = await authApi.login(username, password);
       if (loginResponse) {
         onLogin(loginResponse);
+        onClose();
         return;
-      } 
+      }
 
       this.setState({
         showValidationError: true,
-        errorMessage: 'No pudimos iniciar sesion, por favor intente mas tarde.'
+        errorMessage: "No pudimos iniciar sesion, por favor intente mas tarde.",
       });
     }
-  }
+  };
 
   handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      username: event.target.value
+      username: event.target.value,
     });
-  }
+  };
 
   handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      password: event.target.value
+      password: event.target.value,
     });
-  }
+  };
 
   render() {
     const { onClose } = this.props;
@@ -82,15 +83,25 @@ class LoginModal extends React.PureComponent<PropsType, StateType> {
           <Form onSubmit={this.handleSubmitForm}>
             <Form.Group controlId="formGroupEmail">
               <Form.Label>Email</Form.Label>
-              <Form.Control onChange={this.handleUsernameChange} type="email" placeholder="Ingresa tu email" />
+              <Form.Control
+                onChange={this.handleUsernameChange}
+                type="email"
+                placeholder="Ingresa tu email"
+              />
             </Form.Group>
             <Form.Group controlId="formGroupPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control onChange={this.handlePasswordChange} type="password" placeholder="Password" />
+              <Form.Control
+                onChange={this.handlePasswordChange}
+                type="password"
+                placeholder="Password"
+              />
             </Form.Group>
-            {showValidationError && (<div>
-              <span className="login-validation">{errorMessage}</span>
-            </div>)}
+            {showValidationError && (
+              <div>
+                <span className="login-validation">{errorMessage}</span>
+              </div>
+            )}
             <Form.Row>
               <Col xs={12} md={6}>
                 <Button variant="primary" type="submit">

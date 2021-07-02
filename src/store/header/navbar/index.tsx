@@ -14,17 +14,22 @@ class Nav extends React.PureComponent<PropType> {
   handleNavbarClick = () => {
     const { history } = this.props;
     history.push("/");
-  }
+  };
 
   handleOnCartClick = () => {
     const { history, location } = this.props;
     history.push("/modals/checkout", { background: location });
-  }
+  };
 
   handleAdminClick = () => {
     const { history } = this.props;
     history.push("/admin");
-  }
+  };
+
+  handleSearchClick = (searched: string) => {
+    const { history } = this.props;
+    history.push(`/products?search=${searched}`)
+  };
 
   render() {
     const { location, isLogged, isAdmin } = this.props;
@@ -35,7 +40,12 @@ class Nav extends React.PureComponent<PropType> {
             Productos celiacos!
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggler" />
-          <SearchForm isAdmin={isAdmin} onAdminClick={this.handleAdminClick} onCartClick={this.handleOnCartClick} />
+          <SearchForm
+            onSearchClick={this.handleSearchClick}
+            isAdmin={isAdmin}
+            onAdminClick={this.handleAdminClick}
+            onCartClick={this.handleOnCartClick}
+          />
           <RightBar isLogged={isLogged} location={location} />
         </Navbar>
       </div>

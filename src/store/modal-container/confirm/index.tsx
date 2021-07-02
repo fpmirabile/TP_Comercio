@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import { Modal, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import "./styles.scss";
@@ -17,7 +16,7 @@ class Confirm extends React.PureComponent<PropsType> {
 
   render() {
     return (
-      <div className="checkout">
+      <div className="confirm">
         <Modal.Header closeButton>
           <Modal.Title>Valide que sus datos sean correctos</Modal.Title>
         </Modal.Header>

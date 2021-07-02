@@ -12,12 +12,12 @@ class Promos extends React.PureComponent {
               <img
                 className="w-100 image"
                 src={require("../../../assets/images/slider/1.jpg").default}
-                alt="slide1"
+                alt="granos"
               />
             </div>
             <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <h3>Proba nuestros frutos secos</h3>
+              <p>Precios economicos y muy alta calidad</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
@@ -29,8 +29,8 @@ class Promos extends React.PureComponent {
               />
             </div>
             <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <h3>Proximamente venta de vegetales organicos</h3>
+              <p>Agosto de 2021</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
@@ -42,8 +42,8 @@ class Promos extends React.PureComponent {
               />
             </div>
             <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <h3>Los mejores jugos naturales</h3>
+              <p>Ideales para ver la copa america</p>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>

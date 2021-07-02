@@ -3,9 +3,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Store from "./store";
 import Admin from "./admin";
 import "./App.scss";
-import Products from "./store/pages/products";
-import Header from "./store/header";
-import Footer from "./store/footer";
 
 
 export default class App extends React.PureComponent {

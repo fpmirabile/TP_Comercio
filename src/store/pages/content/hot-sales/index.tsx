@@ -31,6 +31,7 @@ class HotSales extends React.PureComponent {
           {products.map((product) => {
             return (
               <ProductCard
+                id={product.id}
                 title={product.name}
                 imageName={product.imageUrl}
                 discount={product.discount}

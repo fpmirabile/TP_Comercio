@@ -42,22 +42,22 @@ const informacion: Array<MapaSitio> = [
 const contenido: Array<MapaSitio> = [
   {
     title: "Galletitas y snacks",
-    link: "/",
+    link: "/products?category=galletitas",
   },
   {
     title: "Harinas",
-    link: "",
+    link: "/products?category=harinas",
   },
   {
     title: "Panificados",
-    link: "",
+    link: "/products?category=pan",
   },
   {
-    title: "Pastas de arroz",
-    link: "",
+    title: "Pastas",
+    link: "/products?category=pastas",
   },
   {
     title: "Varios",
-    link: "",
+    link: "/products?category=otros",
   },
 ]

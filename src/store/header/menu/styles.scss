@@ -7,12 +7,23 @@
   flex: 1;
 
   .menu-item {
-    padding: 10px 0px 10px 40px;
+    padding: 11px 0;
+
+    &:last-child {
+      padding-bottom: 3px;
+    }
+
     a {
       color: #212121;
       border-bottom: 1px dotted #cdcdcd;
       height: 100%;
       width: 100%;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      padding-right: 50px;
+      border: none;
     }
 
     &:hover {
