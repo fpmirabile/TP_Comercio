@@ -71,6 +71,11 @@
         display: block;
         text-decoration: none;
         margin: auto;
+
+        &:disabled {
+          cursor: not-allowed;
+          opacity: .2
+        }
       }
     }
   }

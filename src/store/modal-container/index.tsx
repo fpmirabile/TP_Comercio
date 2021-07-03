@@ -18,6 +18,7 @@ interface StateProps {
 
 interface PropTypes extends RouteComponentProps<MatchParams> {
   onLogin: (login: LoginTokens) => void;
+  isUserLogged: boolean;
 }
 
 class ModalContainer extends React.PureComponent<PropTypes, StateProps> {
@@ -60,7 +61,7 @@ class ModalContainer extends React.PureComponent<PropTypes, StateProps> {
   }
 
   render() {
-    const { match, onLogin } = this.props;
+    const { match, onLogin, isUserLogged } = this.props;
     const { show } = this.state;
     const { name } = match.params;
     return (
@@ -75,7 +76,7 @@ class ModalContainer extends React.PureComponent<PropTypes, StateProps> {
         )}
         {name === "sign-up" && <SignUp onClose={this.handleClose} />}
         {name === "checkout" && (
-          <Cart onClose={this.handleClose} onCheckout={this.handleCheckout} />
+          <Cart isUserLogged={isUserLogged} onClose={this.handleClose} onCheckout={this.handleCheckout} />
         )}
         {name === "confirm" && (
           <Confirm onClose={this.handleClose} onConfirm={this.handleConfirm} />

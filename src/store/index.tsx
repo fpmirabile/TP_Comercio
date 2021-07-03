@@ -83,7 +83,7 @@ class Store extends React.PureComponent<PropTypes> {
         {background && (
           <Route
             path={`/modals/:name`}
-            children={<ModalContainer onLogin={onUserLogin} />}
+            children={<ModalContainer isUserLogged={!!loggedUser} onLogin={onUserLogin} />}
           />
         )}
         <Footer />

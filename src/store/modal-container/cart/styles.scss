@@ -17,6 +17,16 @@
         display: block;
       }
     }
+    
+    .no-sign-in {
+      margin: 1rem;
+      .legend {
+        font-size: 16px;
+        color: gray;
+        display: block;
+      }
+    }
+
     .products {
       &.more-than-one {
         .product {

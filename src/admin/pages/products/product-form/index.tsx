@@ -298,7 +298,7 @@ class ProductForm extends React.PureComponent<PropTypes, StateType> {
                     type="number"
                     min={1}
                     placeholder="100"
-                    value={this.state.stock}
+                    value={this.state.stock ? this.state.stock : ''}
                     onChange={this.handleStockChange}
                   />
                   <Form.Control.Feedback type="invalid">
