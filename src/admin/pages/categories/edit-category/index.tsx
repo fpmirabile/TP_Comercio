@@ -31,9 +31,7 @@ class EditCategory extends React.PureComponent<PropTypes, StateType> {
     });
   }
 
-  handleEditCategory = async (
-    name: string,
-  ) => {
+  handleEditCategory = async (name: string) => {
     const { category } = this.state;
     const { onEditDone } = this.props;
     if (!category) {
@@ -42,7 +40,7 @@ class EditCategory extends React.PureComponent<PropTypes, StateType> {
 
     const eCategory = await categoryApi.update(category.id, name);
     if (eCategory) {
-        onEditDone();
+      onEditDone();
     }
   };
 

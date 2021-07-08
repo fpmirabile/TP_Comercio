@@ -63,7 +63,7 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
     hasErrors: false,
     errorMessage: "",
     cartItems: [],
-    cartId: '',
+    cartId: "",
   };
 
   handleLoadPageData = async () => {
@@ -77,7 +77,7 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
       const { onRedirectToHome } = this.props;
       onRedirectToHome();
     }
-  }
+  };
 
   componentDidMount() {
     this.handleLoadPageData();
@@ -124,37 +124,40 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
       campos.push("numero de tarjeta no valido");
     }
 
-    const yearVencimiento = Number('20' + tarjeta.yearVencimiento)
+    const yearVencimiento = Number("20" + tarjeta.yearVencimiento);
     if (isNaN(yearVencimiento)) {
       error = true;
       campos.push("vencimiento tarjeta, año no valida");
     }
 
     if (yearVencimiento < 0) {
-      error = true
+      error = true;
       campos.push("vencimiento tarjeta, año no valido");
-    } 
+    }
 
-    const mesVencimiento = Number(tarjeta.mesVencimiento)
+    const mesVencimiento = Number(tarjeta.mesVencimiento);
     if (isNaN(mesVencimiento)) {
       error = true;
       campos.push("vencimiento tarjeta, mes no valido");
     }
 
     if (mesVencimiento > 12 || mesVencimiento < 1) {
-      error = true
+      error = true;
       campos.push("vencimiento tarjeta, mes no valido");
-    } 
+    }
 
     if (!error) {
       const today = new Date();
-      const fechaExpiracion = new Date(yearVencimiento, mesVencimiento - 1, today.getDate());
+      const fechaExpiracion = new Date(
+        yearVencimiento,
+        mesVencimiento - 1,
+        today.getDate()
+      );
       if (fechaExpiracion < today) {
         error = true;
-        campos.push("La fecha de vencimiento no es correcta.")
+        campos.push("La fecha de vencimiento no es correcta.");
       }
     }
-
 
     if (tarjeta.csc.length !== 3) {
       error = true;
@@ -176,15 +179,16 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
     if (!this.formHasErrors()) {
       const { cartId } = this.state;
       const { onCheckoutEnd } = this.props;
-      const order = await orderApi.buyCart('', cartId);
+      const order = await orderApi.buyCart("", cartId);
       if (order) {
         onCheckoutEnd();
         return;
       }
 
       this.setState({
-        errorMessage: 'Hubo un error al intentar realizar el pago, intentelo nuevamente.'
-      })
+        errorMessage:
+          "Hubo un error al intentar realizar el pago, intentelo nuevamente.",
+      });
     }
   };
 
@@ -327,7 +331,7 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
                     if (isNaN(Number(e.target.value))) {
                       return;
                     }
-                    
+
                     this.setState({
                       usuario: {
                         ...this.state.usuario,
@@ -501,7 +505,10 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
                   autoComplete="off"
                   value={this.state.tarjeta.mesVencimiento}
                   onChange={(e) => {
-                    if (isNaN(Number(e.target.value)) || e.target.value.length > 2) {
+                    if (
+                      isNaN(Number(e.target.value)) ||
+                      e.target.value.length > 2
+                    ) {
                       return;
                     }
 
@@ -529,7 +536,10 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
                   autoComplete="off"
                   value={this.state.tarjeta.yearVencimiento}
                   onChange={(e) => {
-                    if (isNaN(Number(e.target.value)) || e.target.value.length > 2) {
+                    if (
+                      isNaN(Number(e.target.value)) ||
+                      e.target.value.length > 2
+                    ) {
                       return;
                     }
                     this.setState({

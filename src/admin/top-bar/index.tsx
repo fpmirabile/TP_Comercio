@@ -13,7 +13,7 @@ interface PropType {
 class Topbar extends React.PureComponent<PropType> {
   render() {
     const { expandedSideBar, onHamburgerClick } = this.props;
-    const topBarClasses = classNames('top-bar', { 'expanded': expandedSideBar })
+    const topBarClasses = classNames("top-bar", { expanded: expandedSideBar });
     return (
       <Navbar className={topBarClasses}>
         <Navbar.Brand onClick={onHamburgerClick}>

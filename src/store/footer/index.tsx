@@ -60,4 +60,4 @@ const contenido: Array<MapaSitio> = [
     title: "Varios",
     link: "/products?category=otros",
   },
-]
+];

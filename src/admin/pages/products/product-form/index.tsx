@@ -265,7 +265,7 @@ class ProductForm extends React.PureComponent<PropTypes, StateType> {
                     type="number"
                     min={1}
                     placeholder="100"
-                    value={this.state.price === 0 ? '' : this.state.price}
+                    value={this.state.price === 0 ? "" : this.state.price}
                     onChange={this.handlePriceChange}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -298,7 +298,7 @@ class ProductForm extends React.PureComponent<PropTypes, StateType> {
                     type="number"
                     min={1}
                     placeholder="100"
-                    value={this.state.stock ? this.state.stock : ''}
+                    value={this.state.stock ? this.state.stock : ""}
                     onChange={this.handleStockChange}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -329,7 +329,12 @@ class ProductForm extends React.PureComponent<PropTypes, StateType> {
             <Button className="btn-crear" variant="success" type="submit">
               {this.props.saveButtonTitle}
             </Button>
-            <Button onClick={this.props.onCancel} className="btn-cancelar" variant="success" type="submit">
+            <Button
+              onClick={this.props.onCancel}
+              className="btn-cancelar"
+              variant="success"
+              type="submit"
+            >
               Cancelar
             </Button>
           </Form>

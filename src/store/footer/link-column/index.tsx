@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import "./styles.scss";
 
 export interface MapaSitio {
-    title: string;
-    link: string;
+  title: string;
+  link: string;
 }
 
 type PropsType = {

@@ -1,5 +1,5 @@
-import { authenticatedGet, authenticatedPost } from "../calls"
-import { Product } from './product';
+import { authenticatedGet, authenticatedPost } from "../calls";
+import { Product } from "./product";
 import { User } from "./user";
 
 export const getStatusText = (status: string) => {
@@ -12,11 +12,11 @@ export const getStatusText = (status: string) => {
     case 2:
       return "Pagado";
     case 3:
-      return "Creado"
+      return "Creado";
     default:
       return "Cancelada";
   }
-}
+};
 
 export interface Order {
   id: string;
@@ -36,20 +36,20 @@ export interface OrderItem {
 
 const getAllOrders = (): Promise<Order[]> => {
   return authenticatedGet(`/orders`);
-}
+};
 
 const getOrderById = (orderId: string): Promise<Order> => {
   return authenticatedGet(`/orders/${orderId}`);
-}
+};
 
 const buyCart = (comments: string, cartId: string): Promise<Order> => {
   return authenticatedPost("/orders", { comments, cartId });
-}
+};
 
 const orderApi = {
   buyCart,
   deleteItem: getOrderById,
   get: getAllOrders,
-}
+};
 
 export default orderApi;

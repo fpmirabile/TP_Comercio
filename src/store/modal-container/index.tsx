@@ -58,7 +58,7 @@ class ModalContainer extends React.PureComponent<PropTypes, StateProps> {
   handleGoToHomePage = () => {
     const { history } = this.props;
     history.push("");
-  }
+  };
 
   render() {
     const { match, onLogin, isUserLogged } = this.props;
@@ -76,7 +76,11 @@ class ModalContainer extends React.PureComponent<PropTypes, StateProps> {
         )}
         {name === "sign-up" && <SignUp onClose={this.handleClose} />}
         {name === "checkout" && (
-          <Cart isUserLogged={isUserLogged} onClose={this.handleClose} onCheckout={this.handleCheckout} />
+          <Cart
+            isUserLogged={isUserLogged}
+            onClose={this.handleClose}
+            onCheckout={this.handleCheckout}
+          />
         )}
         {name === "confirm" && (
           <Confirm onClose={this.handleClose} onConfirm={this.handleConfirm} />

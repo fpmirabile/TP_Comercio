@@ -28,12 +28,12 @@ class Nav extends React.PureComponent<PropType> {
 
   handleSearchClick = (searched: string) => {
     const { history } = this.props;
-    history.push(`/products?search=${searched}`)
+    history.push(`/products?search=${searched}`);
   };
 
   render() {
     const { location, isLogged, isAdmin } = this.props;
-    const disabledCartButton = location.pathname.includes('create-order')
+    const disabledCartButton = location.pathname.includes("create-order");
     return (
       <div className="nav">
         <Navbar fixed="top" bg="light" expand="lg">

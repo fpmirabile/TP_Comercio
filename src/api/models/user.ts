@@ -1,4 +1,8 @@
-import { authenticatedDelete, authenticatedGet, authenticatedPut } from "../calls";
+import {
+  authenticatedDelete,
+  authenticatedGet,
+  authenticatedPut,
+} from "../calls";
 import { DeleteResponse } from "../common";
 
 export interface User {
@@ -8,24 +12,29 @@ export interface User {
 }
 
 const getAllUsers = (): Promise<User> => {
-  return authenticatedGet('/users');
-}
+  return authenticatedGet("/users");
+};
 
 const findUserById = (userId: string): Promise<User> => {
   return authenticatedGet(`/users/${userId}`);
-}
+};
 
 const deleteUserById = (userId: string): Promise<DeleteResponse> => {
-  return authenticatedDelete(`/users/${userId}`)
-}
+  return authenticatedDelete(`/users/${userId}`);
+};
 
-const updateUser = (userId: string, email: string, isAdmin?: boolean, password?: string): Promise<User> => {
-  return authenticatedPut('/users', { id: userId, email, isAdmin, password });
-}
+const updateUser = (
+  userId: string,
+  email: string,
+  isAdmin?: boolean,
+  password?: string
+): Promise<User> => {
+  return authenticatedPut("/users", { id: userId, email, isAdmin, password });
+};
 
 const me = (): Promise<User> => {
   return authenticatedGet("/users/me");
-}
+};
 
 const userApi = {
   getAll: getAllUsers,
@@ -33,6 +42,6 @@ const userApi = {
   deleteById: deleteUserById,
   update: updateUser,
   me: me,
-}
+};
 
 export default userApi;

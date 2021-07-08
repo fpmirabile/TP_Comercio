@@ -32,7 +32,7 @@ class Orders extends React.PureComponent<RouteComponentProps<Params>> {
                 <thead>
                   <tr className="head-column">
                     <th>Producto</th>
-                    <th style={{textAlign: 'right'}}>Precio del item</th>
+                    <th style={{ textAlign: "right" }}>Precio del item</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -40,7 +40,9 @@ class Orders extends React.PureComponent<RouteComponentProps<Params>> {
                     return (
                       <tr key={detail.product.id} className="body-column">
                         <td>{detail.product.name}</td>
-                        <td style={{textAlign: 'right'}}>${detail.discount ? detail.discount : detail.price}</td>
+                        <td style={{ textAlign: "right" }}>
+                          ${detail.discount ? detail.discount : detail.price}
+                        </td>
                       </tr>
                     );
                   })}

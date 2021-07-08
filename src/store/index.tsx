@@ -8,7 +8,7 @@ import {
 import queryString from "query-string";
 import Header from "./header";
 import Footer from "./footer";
-import Logout from './pages/logout';
+import Logout from "./pages/logout";
 import PageContent from "./pages/content";
 import Products from "./pages/products";
 import ModalContainer from "./modal-container";
@@ -39,7 +39,7 @@ class Store extends React.PureComponent<PropTypes> {
     const { onLogout } = this.props;
     onLogout();
     this.handleRedirectToHomePage();
-  }
+  };
 
   render() {
     const { location, match, loggedUser, onUserLogin } = this.props;
@@ -83,7 +83,12 @@ class Store extends React.PureComponent<PropTypes> {
         {background && (
           <Route
             path={`/modals/:name`}
-            children={<ModalContainer isUserLogged={!!loggedUser} onLogin={onUserLogin} />}
+            children={
+              <ModalContainer
+                isUserLogged={!!loggedUser}
+                onLogin={onUserLogin}
+              />
+            }
           />
         )}
         <Footer />

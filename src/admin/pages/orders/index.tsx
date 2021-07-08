@@ -30,7 +30,7 @@ class Orders extends React.PureComponent<RouteComponentProps, StateType> {
     const { history, match } = this.props;
     history.push(`${match.url}/${order.id}`, {
       details: order.details,
-    })
+    });
   };
 
   getOrderTotal = (items: OrderItem[]): number => {
