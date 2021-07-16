@@ -15,6 +15,7 @@ import ModalContainer from "./modal-container";
 import NotFound from "./pages/error-pages/not-found";
 import Checkout from "./pages/final-checkout/index";
 import AboutUs from "./pages/about-us";
+import Orders from "./pages/orders";
 import { LoggedUser } from "../App";
 import { LoginTokens } from "../api/models/auth";
 
@@ -64,6 +65,9 @@ class Store extends React.PureComponent<PropTypes> {
           <Route path={`${match.url}about-us`}>
             <AboutUs />
           </Route>
+          <Route path={`${match.url}orders`}>
+            <Orders title="Mis Ordenes" />
+          </Route>
           <Route path={`${match.url}create-order`}>
             <Checkout
               onRedirectToHome={this.handleRedirectToHomePage}
@@ -73,6 +77,7 @@ class Store extends React.PureComponent<PropTypes> {
           <Route path={`${match.url}logout`}>
             <Logout onLogout={this.handleLogout} />
           </Route>
+
           <Route path={`${match.url}/`}>
             <PageContent loggedUser={loggedUser} />
           </Route>
