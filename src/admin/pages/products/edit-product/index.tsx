@@ -51,7 +51,15 @@ class EditProduct extends React.PureComponent<PropTypes, StateType> {
       return;
     }
 
-    const editedProduct = await productApi.update(product.id, name, stock, price, categoryId, discount, image);
+    const editedProduct = await productApi.update(
+      product.id,
+      name,
+      stock,
+      price,
+      categoryId,
+      discount,
+      image
+    );
     if (editedProduct) {
       onEditedProduct();
     }

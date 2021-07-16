@@ -5,13 +5,15 @@ import LeftBar from "./right-sidebar";
 import Dashboard from "./pages/dashboard";
 import Products from "./pages/products";
 import NewProduct from "./pages/products/new-product";
-import EditProduct from './pages/products/edit-product';
+import EditProduct from "./pages/products/edit-product";
 import Reports from "./pages/reports";
-import Categories from './pages/categories'
-import NewCategory from './pages/categories/new-category';
-import EditCategory from './pages/categories/edit-category';
+import Categories from "./pages/categories";
+import NewCategory from "./pages/categories/new-category";
+import EditCategory from "./pages/categories/edit-category";
 import { LoggedUser } from "../App";
-import { toast } from 'react-toastify';
+import Orders from "./pages/orders";
+import OrderDetail from "./pages/orders/detail";
+import { toast } from "react-toastify";
 import classNames from "classnames";
 import "./styles.scss";
 
@@ -50,12 +52,12 @@ class AdminPage extends React.PureComponent<PropTypes, StateType> {
   handleProductEdit = (id: string) => {
     const { history, match } = this.props;
     history.push(`${match.url}/products/edit/${id}`);
-  }
+  };
 
   handleGoToProductList = () => {
     const { history, match } = this.props;
     history.push(`${match.url}/products/`);
-  }
+  };
 
   handleNewProductCreated = () => {
     const { history, match } = this.props;
@@ -70,8 +72,8 @@ class AdminPage extends React.PureComponent<PropTypes, StateType> {
       style: { top: 50 },
     });
     history.push(`${match.url}/products`);
-  }
-  
+  };
+
   handleProductEdited = () => {
     const { history, match } = this.props;
     toast.success("Producto editado satisfactoriamente", {
@@ -85,12 +87,12 @@ class AdminPage extends React.PureComponent<PropTypes, StateType> {
       style: { top: 50 },
     });
     history.push(`${match.url}/products`);
-  }
+  };
 
   handleGoToCategoryList = () => {
     const { history, match } = this.props;
     history.push(`${match.url}/categories/`);
-  }
+  };
 
   handleCategoryEdited = () => {
     const { history, match } = this.props;
@@ -105,7 +107,7 @@ class AdminPage extends React.PureComponent<PropTypes, StateType> {
       style: { top: 50 },
     });
     history.push(`${match.url}/categories`);
-  }
+  };
 
   handleNewCategory = () => {
     const { history, match } = this.props;
@@ -119,8 +121,8 @@ class AdminPage extends React.PureComponent<PropTypes, StateType> {
       progress: undefined,
       style: { top: 50 },
     });
-    history.push(`${match.url}/products`);
-  }
+    history.push(`${match.url}/categories`);
+  };
 
   render() {
     const { expandSideBar } = this.state;
@@ -138,23 +140,44 @@ class AdminPage extends React.PureComponent<PropTypes, StateType> {
         />
         <div className={bodyMarginClass}>
           <Switch>
+            <Route path={`${match.url}/orders/:orderId`}>
+              <OrderDetail />
+            </Route>
+            <Route path={`${match.url}/orders`}>
+              <Orders />
+            </Route>
             <Route path={`${match.url}/categories/new`}>
-              <NewCategory onCancel={this.handleGoToCategoryList} onCreatedCategory={this.handleNewCategory} />
+              <NewCategory
+                onCancel={this.handleGoToCategoryList}
+                onCreatedCategory={this.handleNewCategory}
+              />
             </Route>
             <Route path={`${match.url}/categories/edit/:id`}>
-              <EditCategory onCancel={this.handleGoToCategoryList} onEditDone={this.handleCategoryEdited} />
+              <EditCategory
+                onCancel={this.handleGoToCategoryList}
+                onEditDone={this.handleCategoryEdited}
+              />
             </Route>
             <Route path={`${match.url}/categories`}>
               <Categories />
             </Route>
             <Route path={`${match.url}/products/edit/:id`}>
-              <EditProduct onEditedProduct={this.handleProductEdited} onCancel={this.handleGoToProductList} />
+              <EditProduct
+                onEditedProduct={this.handleProductEdited}
+                onCancel={this.handleGoToProductList}
+              />
             </Route>
             <Route path={`${match.url}/products/new`}>
-              <NewProduct onCancel={this.handleGoToProductList} onCreatedProduct={this.handleNewProductCreated} />
+              <NewProduct
+                onCancel={this.handleGoToProductList}
+                onCreatedProduct={this.handleNewProductCreated}
+              />
             </Route>
             <Route path={`${match.url}/products`}>
-              <Products onProductEditClick={this.handleProductEdit} onNewProductClick={this.handleNewProductClick} />
+              <Products
+                onProductEditClick={this.handleProductEdit}
+                onNewProductClick={this.handleNewProductClick}
+              />
             </Route>
             <Route path={`${match.url}/charts`}>
               <Reports />

@@ -52,7 +52,6 @@ class Dashboard extends React.PureComponent<PropTypes, StateType> {
       return p;
     }, {} as any);
 
-    console.log(reduceOrders);
     return (
       <div className="dashboard">
         <Helmet>
@@ -107,7 +106,7 @@ class Dashboard extends React.PureComponent<PropTypes, StateType> {
                   return {
                     status: getStatusText(o),
                     count: reduceOrders[o],
-                  }
+                  };
                 })}
                 margin={{
                   top: 5,

@@ -8,7 +8,11 @@ class UserDropdown extends React.PureComponent {
     return (
       <Dropdown className="user-dropdown">
         <DropdownToggle>
-          <img className="user-avatar" alt="userimg" src={require("../../../assets/images/admin/user/img.jpg").default} />
+          <img
+            className="user-avatar"
+            alt="userimg"
+            src={require("../../../assets/images/admin/user/img.jpg").default}
+          />
           <span className="user-name">Usuario Admin</span>
         </DropdownToggle>
         <Dropdown.Menu>

@@ -2,7 +2,7 @@ import * as React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Store from "./store";
 import Admin from "./admin";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { getSession, setSession } from "./api/session";
 import userApi from "./api/models/user";
@@ -15,7 +15,9 @@ export type LoggedUser = {
 };
 
 declare global {
-  interface Window { me: LoggedUser; }
+  interface Window {
+    me: LoggedUser;
+  }
 }
 
 interface StateType {
@@ -37,9 +39,15 @@ export default class App extends React.PureComponent<{}, StateType> {
     } else {
       this.setState({
         loggedUser: undefined,
-      })
+      });
     }
   }
+
+  handleLogout = () => {
+    this.setState({
+      loggedUser: undefined,
+    });
+  };
 
   handleUserLogin = ({ tokens, user }: LoginTokens) => {
     setSession({ jwt: tokens.token, refresh: tokens.refreshToken });
@@ -47,7 +55,7 @@ export default class App extends React.PureComponent<{}, StateType> {
       loggedUser: user,
     });
     window.me = user;
-  }
+  };
 
   render() {
     return (
@@ -59,7 +67,11 @@ export default class App extends React.PureComponent<{}, StateType> {
             <Admin loggedAdmin={this.state.loggedUser} />
           </Route>
           <Route path="/">
-            <Store onUserLogin={this.handleUserLogin} loggedUser={this.state.loggedUser} />
+            <Store
+              onLogout={this.handleLogout}
+              onUserLogin={this.handleUserLogin}
+              loggedUser={this.state.loggedUser}
+            />
           </Route>
         </Switch>
       </BrowserRouter>

@@ -72,7 +72,7 @@ class AdminProducts extends React.PureComponent<PropType> {
 
   selectProductToEdit = (id: string) => () => {
     this.props.onProductEditClick(id);
-  }
+  };
 
   render() {
     const { products } = this.state;
@@ -102,6 +102,7 @@ class AdminProducts extends React.PureComponent<PropType> {
                     <th>SKU</th>
                     <th>Nombre</th>
                     <th>Precio</th>
+                    <th className="product-column-right">Stock</th>
                     <th className="product-column-right">Precio descuento</th>
                     <th style={{ textAlign: "right" }}>Acciones</th>
                   </tr>
@@ -114,12 +115,20 @@ class AdminProducts extends React.PureComponent<PropType> {
                         <td>{product.name}</td>
                         <td>${product.msrp}</td>
                         <td className="product-column-right">
+                          {product.stock}
+                        </td>
+                        <td className="product-column-right">
                           {product.discount
                             ? `$${product.discount}`
                             : "No tiene"}
                         </td>
                         <td className="product-action-buttons">
-                          <Button onClick={this.selectProductToEdit(product.id)} variant="info">Editar</Button>
+                          <Button
+                            onClick={this.selectProductToEdit(product.id)}
+                            variant="info"
+                          >
+                            Editar
+                          </Button>
                           <Button
                             onClick={this.handleDeleteProduct(product)}
                             variant="danger"

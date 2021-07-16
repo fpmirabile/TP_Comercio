@@ -139,9 +139,9 @@ class Confirm extends React.PureComponent<PropsType> {
 
             <Row>
               <Col md="4">
-              <Alert className="total-factura" variant="warning">
-                <b>Total a abonar:     </b> $ 1.500,00
-              </Alert>
+                <Alert className="total-factura" variant="warning">
+                  <b>Total a abonar: </b> $ 1.500,00
+                </Alert>
               </Col>
             </Row>
           </div>

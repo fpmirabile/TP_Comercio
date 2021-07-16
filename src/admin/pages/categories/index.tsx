@@ -19,18 +19,18 @@ class Categories extends React.PureComponent<RouteComponentProps, StateType> {
 
     this.setState({
       categories,
-    })
+    });
   }
 
   handleNewCategoryClick = () => {
     const { history, match } = this.props;
     history.push(`${match.url}/new`);
-  }
+  };
 
   handleEditCategoryClick = (id: string) => () => {
     const { history, match } = this.props;
     history.push(`${match.url}/edit/${id}`);
-  }
+  };
 
   // handleRemoveCategoryClick = () => {}
 
@@ -70,7 +70,12 @@ class Categories extends React.PureComponent<RouteComponentProps, StateType> {
                         <td>{category.name}</td>
                         <td>{category.id}</td>
                         <td className="category-action-buttons">
-                          <Button onClick={this.handleEditCategoryClick(category.id)} variant="info">Editar</Button>
+                          <Button
+                            onClick={this.handleEditCategoryClick(category.id)}
+                            variant="info"
+                          >
+                            Editar
+                          </Button>
                           {/* <Button
                             onClick={this.handleRemoveCategoryClick}
                             variant="danger"
@@ -85,7 +90,7 @@ class Categories extends React.PureComponent<RouteComponentProps, StateType> {
               </table>
               {!categories.length && (
                 <div className="no-data-loaded">
-                  <span>No hay productos cargados</span>
+                  <span>No hay categorias cargadas</span>
                 </div>
               )}
             </div>

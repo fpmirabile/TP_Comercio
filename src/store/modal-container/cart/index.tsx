@@ -7,6 +7,7 @@ import "./styles.scss";
 interface PropsType {
   onClose: () => void;
   onCheckout: () => void;
+  isUserLogged: boolean;
 }
 
 interface StateType {
@@ -76,6 +77,7 @@ class Carrito extends React.PureComponent<PropsType, StateType> {
   };
 
   render() {
+    const { isUserLogged } = this.props;
     const { cartItems } = this.state;
     const cartTotal = cartItems.reduce(
       (sum, current) =>
@@ -96,6 +98,14 @@ class Carrito extends React.PureComponent<PropsType, StateType> {
                 </span>
                 <span className="legend">
                   Aprovecha a comprar en nuestra tienda &#x1F600;
+                </span>
+              </div>
+            )}
+            {!isUserLogged && (
+              <div className="no-sign-in">
+                <span className="legend">
+                  Recuerda que necesitas estar logueado para realizar las
+                  compras
                 </span>
               </div>
             )}

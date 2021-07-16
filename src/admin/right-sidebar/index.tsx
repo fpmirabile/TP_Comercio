@@ -20,20 +20,20 @@ class LeftBar extends React.PureComponent<PropType> {
     history.push(`${match.url}/products`);
   };
 
-  handleReportClick = () => {
+  handleOrdersClick = () => {
     const { history, match } = this.props;
-    history.push(`${match.url}/charts`);
+    history.push(`${match.url}/orders`);
   };
 
   handleGoToTheSite = () => {
     const { history } = this.props;
     history.push("/");
-  }
+  };
 
   handleCategoryClick = () => {
     const { history, match } = this.props;
-    history.push(`${match.url}/categories`)
-  }
+    history.push(`${match.url}/categories`);
+  };
 
   render() {
     const { expandedSidebar } = this.props;
@@ -61,31 +61,46 @@ class LeftBar extends React.PureComponent<PropType> {
                 <h3 className="title">General</h3>
                 <ul className="admin-link">
                   <li className="admin-link-section">
-                    <Button onClick={this.handleHomeClick} className="btn-admin-link">
+                    <Button
+                      onClick={this.handleHomeClick}
+                      className="btn-admin-link"
+                    >
                       <FontAwesomeIcon icon="home" />
                       <span className="button-title">Inicio</span>
                     </Button>
                   </li>
                   <li className="admin-link-section">
-                    <Button onClick={this.handleProductClick} className="btn-admin-link">
+                    <Button
+                      onClick={this.handleProductClick}
+                      className="btn-admin-link"
+                    >
                       <FontAwesomeIcon icon="shopping-cart" />
                       <span className="button-title">Productos</span>
                     </Button>
                   </li>
                   <li className="admin-link-section">
-                    <Button onClick={this.handleCategoryClick} className="btn-admin-link">
+                    <Button
+                      onClick={this.handleCategoryClick}
+                      className="btn-admin-link"
+                    >
                       <FontAwesomeIcon icon="list-ul" />
                       <span className="button-title">Categorias</span>
                     </Button>
                   </li>
                   <li className="admin-link-section">
-                    <Button onClick={this.handleReportClick} className="btn-admin-link">
+                    <Button
+                      onClick={this.handleOrdersClick}
+                      className="btn-admin-link"
+                    >
                       <FontAwesomeIcon icon="table" />
-                      <span className="button-title">Reportes</span>
+                      <span className="button-title">Ordenes</span>
                     </Button>
                   </li>
                   <li className="admin-link-section">
-                    <Button onClick={this.handleGoToTheSite} className="btn-admin-link">
+                    <Button
+                      onClick={this.handleGoToTheSite}
+                      className="btn-admin-link"
+                    >
                       <FontAwesomeIcon icon="backward" />
                       <span className="button-title">Volver al sitio</span>
                     </Button>

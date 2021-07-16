@@ -17,7 +17,8 @@
       background-color: transparent !important;
     }
 
-    &:active, &:focus {
+    &:active,
+    &:focus {
       outline: none !important;
       border: none !important;
     }
@@ -30,7 +31,7 @@
     }
 
     .user-name {
-      color: #5E6974;
+      color: #5e6974;
       margin-right: 0.5rem;
     }
   }

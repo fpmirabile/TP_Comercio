@@ -29,12 +29,13 @@ class SearchForm extends React.PureComponent<PropTypes, StateType> {
   handleOnSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     this.handleSearchButtonClick();
-  }
+  };
 
   handleSearchButtonClick = () => this.props.onSearchClick(this.state.search);
 
   render() {
-    const { isAdmin, onCartClick, onAdminClick, disabledCartButton } = this.props;
+    const { isAdmin, onCartClick, onAdminClick, disabledCartButton } =
+      this.props;
     return (
       <div className="search-form">
         <Form className="navbar-form" inline onSubmit={this.handleOnSubmit}>

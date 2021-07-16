@@ -8,7 +8,7 @@ import {
 import queryString from "query-string";
 import Header from "./header";
 import Footer from "./footer";
-import Logout from './pages/logout';
+import Logout from "./pages/logout";
 import PageContent from "./pages/content";
 import Products from "./pages/products";
 import ModalContainer from "./modal-container";
@@ -22,6 +22,7 @@ import { LoginTokens } from "../api/models/auth";
 interface PropTypes extends RouteComponentProps {
   loggedUser?: LoggedUser;
   onUserLogin: (login: LoginTokens) => void;
+  onLogout: () => void;
 }
 
 class Store extends React.PureComponent<PropTypes> {
@@ -36,11 +37,10 @@ class Store extends React.PureComponent<PropTypes> {
   };
 
   handleLogout = () => {
-    this.setState({
-      loggedUser: undefined,
-    });
+    const { onLogout } = this.props;
+    onLogout();
     this.handleRedirectToHomePage();
-  }
+  };
 
   render() {
     const { location, match, loggedUser, onUserLogin } = this.props;
@@ -88,7 +88,12 @@ class Store extends React.PureComponent<PropTypes> {
         {background && (
           <Route
             path={`/modals/:name`}
-            children={<ModalContainer onLogin={onUserLogin} />}
+            children={
+              <ModalContainer
+                isUserLogged={!!loggedUser}
+                onLogin={onUserLogin}
+              />
+            }
           />
         )}
         <Footer />
