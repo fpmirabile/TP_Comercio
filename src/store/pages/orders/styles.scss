@@ -1,75 +1,58 @@
-.orders{
-.container {
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  justify-content: center;
-  .collapse-root{
-    background-color: #9dcc8f;
-    --display: table-cell;
+.orders {
+  .container {
     display: flex;
     flex-flow: column wrap;
     align-items: center;
     justify-content: center;
-    vertical-align: middle;
-  }
-  .collapse-head{
-    color: inherit;
-    display: table-row;
-    outline: 0;
-    vertical-align: middle;
-  }
-  .collapse-body{
-    display: table;
-    font-size: 0.875rem;
-    text-align: left;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    font-weight: 400;
-    line-height: 1.43;
-    border-bottom: 1px solid rgba(81, 81, 81, 1);
-    letter-spacing: 0.01071em;
-    vertical-align: inherit;
-  }
-  .table-condensed{
-    border-collapse:collapse;
-  }
-  .asd{
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit;
-  }
-  .title {
-    color: #212121 !important;
-    padding-bottom: 0.5em;
-    padding-top:20px;
-    position: relative;
-    font-size: 2.5em;
-    margin-bottom: 2rem;
-    border-color: #212121;
+    .thead-principal{
+      background: #BDBDBD;
 
-    &::after {
-      content: "";
-      background: #fa1818 !important;
-      height: 2px;
-      width: 100%;
-      position: absolute;
-      bottom: 10%;
-      left: 0;
     }
-}
+    .collapse-root {
+      background-color: #9dcc8f;
+      display: table-cell;
+      flex-flow: column wrap;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+    }
+    .table-condensed {
+      border-collapse: collapse;
+    }
+    .items-table {
+      margin-bottom: 0 !important;
+    }
+    .title {
+      color: #212121 !important;
+      padding-bottom: 0.5em;
+      padding-top: 20px;
+      position: relative;
+      font-size: 2.5em;
+      margin-bottom: 2rem;
+      border-color: #212121;
 
-.table{
-  background-color: #e4dcd6;
-  .thead{
-    background-color: #9dcc8f  !important;
-  }
-}
+      &::after {
+        content: "";
+        background: #fa1818 !important;
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        bottom: 10%;
+        left: 0;
+      }
+    }
 
+    .table {
+      background-color: #e4dcd6;
+      .thead {
+        background-color: #9dcc8f !important;
+      }
+    }
   }
-  th{
+  th {
     text-align: center;
   }
-  td{
+  td {
     text-align: center;
   }
   .no-orders {

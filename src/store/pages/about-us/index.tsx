@@ -50,6 +50,9 @@ class AboutUs extends React.PureComponent {
               para comercios o ventas mayoristas, contactate con nosotros. Va a
               ser un gusto conocernos.
             </Card>
+            <Card className="card-fines">
+              <Card.Body> Este sitio fue diseñado 100% con fines educativos sin intensiones de lucro</Card.Body>
+            </Card>
           </Col>
         </Container>
       </div>
