@@ -68,6 +68,7 @@ class ProductForm extends React.PureComponent<PropTypes, StateType> {
   };
 
   render() {
+    const { category } = this.props;
     const { showValidationError, errorMessage } = this.state;
     return (
       <div className="category-admin-form">
@@ -77,7 +78,7 @@ class ProductForm extends React.PureComponent<PropTypes, StateType> {
           validated={showValidationError}
         >
           <div className="create-category-title justify-content-left">
-            <h2>Crear Categoria</h2>
+            <h2>{!!category ? 'Editar' : 'Crear'} Categoria</h2>
           </div>
           <Form.Row>
             <Form.Group as={Col} md="6" controlId="validationCustom01">
