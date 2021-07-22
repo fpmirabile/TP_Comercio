@@ -29,4 +29,4 @@ Una vez ejecutado, no se puede volver atras, asi que tener en cuenta esto.
 
 Es un script que ejecuta prettier sobre todos los archivos ts, tsx, scss y los modifica en base a las reglas de linting.
 
-Para correr este proyecto se necesita del [Siguiente backend](http://localhost:3000) funcionando.
+Para correr este proyecto se necesita del [Siguiente backend](https://github.com/fpmirabile/TP_Comercio_Back) funcionando.

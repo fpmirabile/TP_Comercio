@@ -42,7 +42,6 @@ class Dashboard extends React.PureComponent<PropTypes, StateType> {
   render() {
     const { user } = this.props;
     const { orders, topSellProducts } = this.state;
-
     const reduceOrders = orders.reduce((p, c) => {
       const status = c.status;
       if (!p[status]) {

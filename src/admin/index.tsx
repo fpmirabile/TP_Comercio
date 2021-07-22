@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Route, RouteComponentProps, Switch, withRouter } from "react-router";
 import Topbar from "./top-bar";
-import LeftBar from "./right-sidebar";
+import LeftBar from "./left-sidebar";
 import Dashboard from "./pages/dashboard";
 import Products from "./pages/products";
 import NewProduct from "./pages/products/new-product";

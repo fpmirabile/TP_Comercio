@@ -5,7 +5,7 @@ import Login from "./login";
 import SignUp from "./sign-up";
 import Cart from "./cart";
 import Confirm from "./confirm";
-import OperationOK from "./alerta";
+import OperationOK from "./alert";
 import { LoginTokens } from "../../api/models/auth";
 
 interface MatchParams {
@@ -61,8 +61,9 @@ class ModalContainer extends React.PureComponent<PropTypes, StateProps> {
   };
 
   render() {
-    const { match, onLogin, isUserLogged } = this.props;
+    const { match, onLogin, isUserLogged, location } = this.props;
     const { show } = this.state;
+    const operationNumber = location.state && location.state.operationNumber;
     const { name } = match.params;
     return (
       <Modal
@@ -88,7 +89,7 @@ class ModalContainer extends React.PureComponent<PropTypes, StateProps> {
         {name === "alerta" && (
           <OperationOK
             onConfirm={this.handleGoToHomePage}
-            operationNumber="999234782"
+            operationNumber={operationNumber}
             type="success"
           />
         )}

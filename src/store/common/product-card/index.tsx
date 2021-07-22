@@ -38,6 +38,7 @@ class ProductCard extends React.PureComponent<PropTypes> {
 
   render() {
     const { imageName, title, discount, price, enableAddButton } = this.props;
+    const currentPrice = discount && discount > 0 ? discount : price;
     return (
       <div className="product-category">
         <Card>
@@ -56,9 +57,10 @@ class ProductCard extends React.PureComponent<PropTypes> {
             </Card.Title>
             <Card.Text>
               <span className="actual-price">
-                ${discount ? discount : price}
+                $
+                {currentPrice}
               </span>
-              {discount && (
+              {!!discount && (
                 <span className="price-without-discount">${price}</span>
               )}
             </Card.Text>

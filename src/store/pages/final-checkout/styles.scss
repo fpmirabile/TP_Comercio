@@ -17,7 +17,14 @@
       border: 1px solid black;
       border-radius: 5px;
       padding: 2rem 2rem 1rem 2rem;
+      min-width: 30%;
 
+      .col-md-6 {
+        span {
+          text-align: right;
+          display: block;
+        }
+      }
       .product-separator {
         &:not(:last-child) {
           border-bottom: 1px solid gray;

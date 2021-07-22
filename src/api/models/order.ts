@@ -31,11 +31,11 @@ export interface OrderItem {
   product: Product;
   quantity: number;
   price: number;
-  discount: number;
+  discount?: number;
 }
 
 const getAllOrders = (): Promise<Order[]> => {
-  return authenticatedGet(`/orders`);
+  return authenticatedGet('/orders/getAll');
 };
 
 const getOrderById = (orderId: string): Promise<Order> => {
@@ -43,13 +43,18 @@ const getOrderById = (orderId: string): Promise<Order> => {
 };
 
 const buyCart = (comments: string, cartId: string): Promise<Order> => {
-  return authenticatedPost("/orders", { comments, cartId });
+  return authenticatedPost('/orders', { comments, cartId });
 };
+
+const getMyOrders = (): Promise<Order[]> => {
+  return authenticatedGet('/orders');
+}
 
 const orderApi = {
   buyCart,
   deleteItem: getOrderById,
   get: getAllOrders,
+  getMyOrders: getMyOrders,
 };
 
 export default orderApi;

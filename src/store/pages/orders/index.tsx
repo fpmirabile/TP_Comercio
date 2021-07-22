@@ -1,59 +1,65 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classNames from "classnames";
 import * as React from "react";
-import { Row, Table, Col, Container } from "react-bootstrap";
-import orderApi, { Order, OrderItem } from "../../../api/models/order";
-import productApi, { Product } from "../../../api/models/product";
+import { Table, Container } from "react-bootstrap";
+import orderApi, { getStatusText, Order, OrderItem } from "../../../api/models/order";
+import { Product } from "../../../api/models/product";
 import "./styles.scss";
 
 interface StateType {
   orders: Order[];
-  page: number;
-  pageSize: number;
-  hideShowMoreButton: boolean;
+  expandedRow: number;
 }
 
-interface PropTypes {
-  title: string;
-}
-
-class Orders extends React.PureComponent<PropTypes> {
-  onClickHandler = (e) => {
-    const hiddenElement = e.currentTarget.nextSibling;
-    hiddenElement.className.indexOf("collapse show") > -1
-      ? hiddenElement.classList.remove("show")
-      : hiddenElement.classList.add("show");
-  };
-
+class Orders extends React.PureComponent<{}, StateType> {
   state: StateType = {
-    pageSize: 20,
-    page: 1,
     orders: [],
-    hideShowMoreButton: false,
+    expandedRow: -1,
   };
+
+  async componentDidMount() {
+    const { orders } = this.state;
+    if (!orders.length) {
+      const orders = await orderApi.getMyOrders() || [];
+      this.setState({
+        orders,
+      });
+    }
+  }
+
+  handleExpansion = (index: number) => () => {
+    const { expandedRow } = this.state;
+    const currentIndex = index === expandedRow ? -1 : index
+    this.setState({
+      expandedRow: currentIndex,
+    })
+  }
 
   renderOrder = (
     idOrden: string,
     status: string,
-    items: OrderItem[],
-    createdAt: string
+    totalPrice: number,
+    createdAt: string,
+    index: number,
+    expanded: boolean,
   ) => {
-    const importeTotal = items.reduce((acc, current) => {
-      return current.discount ? acc + current.discount : acc + current.price;
-    }, 0);
-
     return (
-      <tr key={idOrden} onClick={this.onClickHandler}>
-        <td colSpan={1}>...</td>
+      <tr key={idOrden} className="clickable" onClick={this.handleExpansion(index)}>
+        <td colSpan={1}>
+          <FontAwesomeIcon icon={expanded ? 'arrow-up' : 'arrow-down'} />
+        </td>
         <td colSpan={2}>{idOrden}</td>
         <td colSpan={2}>{createdAt}</td>
-        <td colSpan={3}>{status}</td>
-        <td colSpan={2}>{importeTotal}</td>
+        <td colSpan={3}>{getStatusText(status)}</td>
+        <td colSpan={2}>${totalPrice}</td>
       </tr>
     );
   };
 
-  renderDetalle = (items: OrderItem[]) => {
+  renderDetalle = (items: OrderItem[], expanded: boolean) => {
+    const classes = classNames('collapse', { show: expanded })
     return (
-      <tr className="collapse">
+      <tr className={classes}>
         <td className="collapse show collapse-root" colSpan={12}>
           <Table className="collapse show items-table" hover size="sm">
             <thead className="collapse show">
@@ -92,15 +98,9 @@ class Orders extends React.PureComponent<PropTypes> {
     product: Product,
     quantity: number,
     price: number,
-    discount: number
+    discount?: number
   ) => {
-    let precio = 0;
-
-    if (discount === 0) {
-      precio = price;
-    } else {
-      precio = discount;
-    }
+    const precio = discount ?? price;
     const subtotal = precio * quantity;
     return (
       <tr>
@@ -117,17 +117,16 @@ class Orders extends React.PureComponent<PropTypes> {
   };
 
   render() {
-    const { title } = this.props;
-    const { orders } = this.state;
+    const { orders, expandedRow } = this.state;    
     return (
       <div className="orders">
         <Container>
-          <div className="title">{title}</div>
-          {orders.length !== 0 && (
+          <div className="title">Mis Ordenes</div>
+          {orders && orders.length > 0 && (
             <Table hover>
               <thead className="thead-principal">
                 <tr>
-                  <th colSpan={1}></th>
+                  <th colSpan={1}>Detalle</th>
                   <th colSpan={2}>Nº de Orden</th>
                   <th colSpan={2}>Fecha de compra</th>
                   <th colSpan={3}>Estado</th>
@@ -135,16 +134,22 @@ class Orders extends React.PureComponent<PropTypes> {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order) => {
+                {orders.map((order, index) => {
+                  const total = order.details.reduce((acc, current) => {
+                    return current.discount ? acc + current.discount : acc + current.price;
+                  }, 0);
+                  const expanded = index === expandedRow;
                   return (
                     <React.Fragment>
                       {this.renderOrder(
                         order.id,
                         order.status,
-                        order.items,
-                        order.createdAt
+                        total,
+                        order.createdAt,
+                        index,
+                        expanded,
                       )}
-                      {this.renderDetalle(order.items)}
+                      {this.renderDetalle(order.details, expanded)}
                     </React.Fragment>
                   );
                 })}

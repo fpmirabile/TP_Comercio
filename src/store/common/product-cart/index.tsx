@@ -21,7 +21,7 @@ class ProductCart extends React.PureComponent<PropTypes> {
     } = this.props;
     return (
       <Row className="product">
-        <Col md={6}>
+        <Col md={5}>
           <div className="product-name">{cartItem.product.name}</div>
           {cartItem.discount && (
             <span className="discount">
@@ -30,7 +30,7 @@ class ProductCart extends React.PureComponent<PropTypes> {
           )}
         </Col>
         {!hideInputs && (
-          <Col md={2}>
+          <Col md={3}>
             <Form.Control
               onChange={onQuantityChange}
               value={cartItem.quantity}
@@ -44,7 +44,7 @@ class ProductCart extends React.PureComponent<PropTypes> {
             <FontAwesomeIcon icon="trash" className="mt-1" />
           </Col>
         )}
-        <Col md={2}>
+        <Col md={hideInputs ? 6: 2}>
           <span>${cartItem.discount ? cartItem.discount : cartItem.price}</span>
         </Col>
       </Row>

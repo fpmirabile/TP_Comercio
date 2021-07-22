@@ -26,9 +26,9 @@ interface PropTypes extends RouteComponentProps {
 }
 
 class Store extends React.PureComponent<PropTypes> {
-  handleCheckoutEnd = () => {
+  handleCheckoutEnd = (operationNumber: string) => {
     const { history, location } = this.props;
-    history.push("/modals/alerta", { background: location });
+    history.push("/modals/alerta", { background: location, operationNumber });
   };
 
   handleRedirectToHomePage = () => {
@@ -66,7 +66,7 @@ class Store extends React.PureComponent<PropTypes> {
             <AboutUs />
           </Route>
           <Route path={`${match.url}orders`}>
-            <Orders title="Mis Ordenes" />
+            <Orders />
           </Route>
           <Route path={`${match.url}create-order`}>
             <Checkout

@@ -36,7 +36,7 @@ interface StateType {
 }
 
 interface PropTypes {
-  onCheckoutEnd: () => void;
+  onCheckoutEnd: (operationNumber: string) => void;
   onRedirectToHome: () => void;
 }
 
@@ -51,7 +51,7 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
       departamento: "",
       ciudad: "",
       codPostal: "",
-      provincia: "",
+      provincia: "CABA",
     },
     tarjeta: {
       nombre: "",
@@ -181,7 +181,7 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
       const { onCheckoutEnd } = this.props;
       const order = await orderApi.buyCart("", cartId);
       if (order) {
-        onCheckoutEnd();
+        onCheckoutEnd(order.id);
         return;
       }
 
@@ -390,6 +390,11 @@ class Checkout extends React.PureComponent<PropTypes, StateType> {
                 <Form.Control
                   value={this.state.usuario.codPostal}
                   onChange={(e) => {
+                    const codigoPostal = Number(e.target.value);
+                    if (isNaN(codigoPostal) || codigoPostal <= 0) {
+                      return;
+                    }
+
                     this.setState({
                       usuario: {
                         ...this.state.usuario,

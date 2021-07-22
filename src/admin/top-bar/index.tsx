@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Button, Navbar, Nav } from "react-bootstrap";
+import { Button, Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import UserDropdown from "./user-dropdown";
+// import UserDropdown from "./user-dropdown";
 import classNames from "classnames";
 import "./styles.scss";
 
@@ -23,9 +23,9 @@ class Topbar extends React.PureComponent<PropType> {
             </Button>
           </div>
         </Navbar.Brand>
-        <Nav className="ml-auto right-buttons">
+        {/* <Nav className="ml-auto right-buttons">
           <UserDropdown />
-        </Nav>
+        </Nav> */}
       </Navbar>
     );
   }

@@ -131,7 +131,7 @@ class Products extends React.PureComponent<PropTypes, StateType> {
               );
             })}
           </div>
-          {!hideShowMoreButton && (
+          {!hideShowMoreButton && products.length > 0 && (
             <Button
               className="show-more-products"
               onClick={this.handleLoadMore}

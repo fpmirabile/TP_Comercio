@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Col, Form, InputGroup, Button, Card } from "react-bootstrap";
+import { Col, Form, InputGroup, Button } from "react-bootstrap";
 import { Category } from "../../../../api/models/category";
 import { Product } from "../../../../api/models/product";
+import ProductCard from "../../../../store/common/product-card";
 import "./style.scss";
 
 interface PropTypes {
@@ -94,7 +95,7 @@ class ProductForm extends React.PureComponent<PropTypes, StateType> {
   handleDiscountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     const discountNumber = Number(value);
-    if (isNaN(discountNumber)) {
+    if (isNaN(discountNumber) || discountNumber <= 0) {
       return;
     }
 
@@ -341,36 +342,13 @@ class ProductForm extends React.PureComponent<PropTypes, StateType> {
         </Col>
         <Col md={6}>
           <div className="product-preview">
-            <Card>
-              <Card.Img
-                variant="top"
-                src={
-                  this.state.imageUrl ||
-                  this.state.base64TextString ||
-                  require(`../../../../assets/images/product/img-no-disp.jpg`)
-                    .default
-                }
-                alt={this.state.name}
-              />
-              <Card.Body>
-                <Card.Title>
-                  <Card.Title>{this.state.name}</Card.Title>
-                </Card.Title>
-                <Card.Text>
-                  <span className="actual-price">
-                    $
-                    {this.state.discount
-                      ? this.state.discount
-                      : this.state.price}
-                  </span>
-                  {this.state.discount && (
-                    <span className="price-without-discount">
-                      ${this.state.price}
-                    </span>
-                  )}
-                </Card.Text>
-              </Card.Body>
-            </Card>
+            <ProductCard
+              price={this.state.price}
+              title={this.state.name}
+              discount={this.state.discount}
+              imageName={this.state.base64TextString}
+              enableAddButton={false}
+            />
           </div>
         </Col>
       </div>

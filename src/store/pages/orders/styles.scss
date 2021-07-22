@@ -1,4 +1,9 @@
 .orders {
+  margin-bottom: 3rem;
+  .clickable {
+    cursor: pointer;
+  }
+
   .container {
     display: flex;
     flex-flow: column wrap;
